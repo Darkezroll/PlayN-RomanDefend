@@ -1,28 +1,25 @@
 package Romandefense.core;
 
-import playn.core.Image;
 import playn.core.ImageLayer;
-import playn.core.Pointer;
+
+import playn.core.*;
+
+
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 import tripleplay.game.UIScreen;
-
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 
-/**
- * Created by Chettawat on 26/2/2557.
- */
-public class Home extends UIScreen {
+
+public class HomeScreen extends UIScreen{
 
     private final ScreenStack ss;
     private Image btImage;
     private ImageLayer btLayer;
 
-    public Home(ScreenStack ss) {
-
+    public HomeScreen(ScreenStack ss){
         this.ss = ss;
-
     }
 
     @Override
@@ -35,15 +32,15 @@ public class Home extends UIScreen {
 
         btImage = assets().getImage("images/start.png");
         btLayer = graphics().createImageLayer(btImage);
-        btLayer.setTranslation(27,322);
+        btLayer.setTranslation(27, 322);
         layer.add(btLayer);
 
-        btLayer.addListener(new Pointer.Adapter(){
+        btLayer.addListener(new Pointer.Adapter() {
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
 
-                Screen home = new Dungeon(ss);
+                Screen home = new StartScreen(ss);
                 ss.push(home);
             }
         });

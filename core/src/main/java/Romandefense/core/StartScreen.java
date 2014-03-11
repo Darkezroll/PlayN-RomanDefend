@@ -1,27 +1,28 @@
 package Romandefense.core;
 
-import playn.core.Image;
-import playn.core.ImageLayer;
-import playn.core.Pointer;
+import playn.core.*;
+import react.UnitSlot;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
+import tripleplay.game.UIScreen;
+import tripleplay.ui.*;
+import tripleplay.ui.layout.AxisLayout;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 
 /**
- * Created by Chettawat on 26/2/2557.
+ * Created by AprilMcBkPro on 22/01/2014.
  */
-public class Dungeon extends Screen {
+public class StartScreen extends UIScreen {
+
 
     private final ScreenStack ss;
     private Image btImage;
     private ImageLayer btLayer;
 
-    public Dungeon(ScreenStack ss) {
-
+    public StartScreen(ScreenStack ss){
         this.ss = ss;
-
     }
 
     @Override
@@ -37,12 +38,12 @@ public class Dungeon extends Screen {
         btLayer.setTranslation(380,210);
         layer.add(btLayer);
 
-        btLayer.addListener(new Pointer.Adapter(){
+        btLayer.addListener(new Pointer.Adapter() {
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
 
-                Screen game = new Game(ss);
+                Screen game = new GameScreen(ss);
                 ss.push(game);
             }
 
@@ -57,9 +58,10 @@ public class Dungeon extends Screen {
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
-                ss.remove(Dungeon.this);
+                ss.remove(StartScreen.this);
             }
 
         });
     }
+
 }

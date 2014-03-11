@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+//package playn.sample.hello.core.sprite;
 package Sprite;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ import static playn.core.PlayN.log;
  */
 public class Sprite {
 
-    private ImageLayer layer;
+    ImageLayer layer;
     private List<SpriteImage> spriteImages;
     private HashMap<String, Integer> spriteIdMap;
     private Callback<Sprite> callback;

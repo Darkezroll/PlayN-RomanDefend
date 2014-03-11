@@ -1,36 +1,41 @@
 package Romandefense.core;
 
-import static playn.core.PlayN.*;
-
 import playn.core.Game;
-import playn.core.Image;
-import playn.core.ImageLayer;
-import tripleplay.game.Screen;
+import playn.core.Mouse;
+import playn.core.PlayN;
+import playn.core.util.Clock;
 import tripleplay.game.ScreenStack;
+
+
 
 public class MyGame extends Game.Default {
 
     private ScreenStack ss = new ScreenStack();
+    private Clock.Source clock = new Clock.Source(33);
 
-  public MyGame() {
-    super(33); // call update every 33ms (30 times per second)
-  }
+    public MyGame() {
+        super(33);
+    }
 
-  @Override
-  public void init() {
+    @Override
+    public void init() {
 
+        ss.push(new HomeScreen(ss));
 
-      Screen menu = new Home(ss);
-      ss.push(menu);
-  }
+    }
 
-  @Override
-  public void update(int delta) {
-      ss.update(delta);
-  }
+    @Override
+    public void update(int delta) {
 
-  @Override
-  public void paint(float alpha) {
-    // the background automatically paints itself, so no need to do anything here!
-  }
+        ss.update(delta);
+
+    }
+
+    @Override
+    public void paint(float alpha) {
+
+        clock.paint(alpha);
+        ss.paint(clock);
+
+    }
 }
