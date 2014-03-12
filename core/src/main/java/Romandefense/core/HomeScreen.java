@@ -1,10 +1,7 @@
 package Romandefense.core;
 
 import playn.core.ImageLayer;
-
 import playn.core.*;
-
-
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 import tripleplay.game.UIScreen;

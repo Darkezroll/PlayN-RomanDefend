@@ -64,36 +64,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ares.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/ares.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="19" selection-start="423" selection-end="423" vertical-scroll-proportion="0.30222222" vertical-offset="0" max-vertical-offset="2057">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameScreen.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GameScreen.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/GameScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="14" selection-start="986" selection-end="986" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="5236">
+            <state line="57" column="29" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.22616407" vertical-offset="765" max-vertical-offset="6154">
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeScreen.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/HomeScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="28" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#906#1161#0" expanded="true" />
-                <element signature="e#1150#1151#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,7 +78,45 @@
       <file leaf-file-name="zeus.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/zeus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+            <state line="30" column="65" selection-start="912" selection-end="912" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zeus.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/zeus.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="1" selection-start="0" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="minutor.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/minutor.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="1" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Minutor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/Minutor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="51" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0" vertical-offset="1155" max-vertical-offset="2057">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ares.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/ares.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="51" selection-start="0" selection-end="2915" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="2057">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,7 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/MyGame.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/Home.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/Dungeon.java" />
         <option value="$PROJECT_DIR$/assets/src/main/resources/assets/images/zeus.json" />
@@ -132,9 +145,13 @@
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/DebugDrawBox2D.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/Sprite/ares.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/Sprite/zeus.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/GameScreen.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/HomeScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/TitanUnit.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/MyGame.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/Sprite/zeus.java" />
+        <option value="$PROJECT_DIR$/assets/src/main/resources/assets/images/minutor.json" />
+        <option value="$PROJECT_DIR$/core/src/main/java/Sprite/Minutor.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/Romandefense/core/GameScreen.java" />
       </list>
     </option>
   </component>
@@ -146,7 +163,6 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
-    <option name="showIgnored" value="false" />
     <treeState>
       <PATH>
         <PATH_ELEMENT>
@@ -188,7 +204,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -353,6 +368,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -363,7 +379,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/game01/game01" />
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
     <property name="OverrideImplement.combined" value="true" />
@@ -553,24 +569,24 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.17358893" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="797" y="159" width="326" height="721" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.108093716" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" x="797" y="159" width="326" height="721" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.22138229" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.22090517" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -599,6 +615,52 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/GameScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="325" column="20" selection-start="8439" selection-end="8439" vertical-scroll-proportion="0.0" vertical-offset="5525" max-vertical-offset="5831">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/MyGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="35" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/zeus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="0" selection-start="2914" selection-end="2914" vertical-scroll-proportion="0.0" vertical-offset="1938" max-vertical-offset="2040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/GameScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="319" column="37" selection-start="8391" selection-end="8391" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="6239">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/MyGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="35" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/zeus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="0" selection-start="2914" selection-end="2914" vertical-scroll-proportion="0.0" vertical-offset="936" max-vertical-offset="2040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="13" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="1003">
@@ -615,30 +677,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/zeus.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/zeus.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/zeus.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="1" selection-start="0" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/ares.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="1" selection-start="298" selection-end="298" vertical-scroll-proportion="0.25976232" vertical-offset="0" max-vertical-offset="589">
-          <folding />
-        </state>
+        <state line="9" column="1" selection-start="298" selection-end="298" vertical-scroll-proportion="0.25976232" vertical-offset="0" max-vertical-offset="589" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
@@ -655,20 +704,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/DebugDrawBox2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4879">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/HomeScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="28" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+        <state line="2" column="29" selection-start="57" selection-end="57" vertical-scroll-proportion="0.037777778" vertical-offset="0" max-vertical-offset="900">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#906#1161#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
+            <element signature="e#903#1158#0" expanded="false" />
+            <element signature="e#1147#1148#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/MyGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="36" selection-start="443" selection-end="443" vertical-scroll-proportion="0.33924612" vertical-offset="0" max-vertical-offset="902">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/zeus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2040">
+        <state line="30" column="65" selection-start="912" selection-end="912" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/zeus.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="1" selection-start="0" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/minutor.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="1" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/ares.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="51" selection-start="0" selection-end="2915" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="2057">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/Minutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="51" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0" vertical-offset="1155" max-vertical-offset="2057">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -677,23 +769,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/GameScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="14" selection-start="986" selection-end="986" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="5236">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/Romandefense/core/DebugDrawBox2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4879">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/Sprite/ares.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="19" selection-start="423" selection-end="423" vertical-scroll-proportion="0.30222222" vertical-offset="0" max-vertical-offset="2057">
+        <state line="57" column="29" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.22616407" vertical-offset="765" max-vertical-offset="6154">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -1,5 +1,6 @@
 package Romandefense.core;
 
+import Sprite.Minutor;
 import Sprite.ares;
 import Sprite.zeus;
 import org.jbox2d.callbacks.DebugDraw;
@@ -11,68 +12,56 @@ import playn.core.util.Clock;
 import tripleplay.game.ScreenStack;
 import tripleplay.game.UIScreen;
 
-import java.util.ArrayList;
-
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 
 
 public class GameScreen extends UIScreen {
 
+
     public static float M_PER_PIXEL = 1 / 26.666667f;
-    //size of world
-    private static int width  = 24;  // 640 pixel in physic unit (meter)
-    private static int height = 18;  // 480 pixel in physic unit (meter)
+
+    private static int width  = 24;
+    private static int height = 18;
+
 
     private World world;
     private DebugDrawBox2D debugDraw;
     private boolean showDebugDraw = true;
-
     private  ScreenStack ss;
-
-    private Image bgImage;
-    private Layer bgLayer;
-    private Image btImage;
-    private Layer btLayer;
+    private Image bgImage,btImage;
+    private Layer bgLayer,btLayer;
 
     private zeus z,z1,z2,z3;
     private ares a,a1,a2,a3;
+    private Minutor m;
 
-    private boolean countz = false;
-    private boolean counta = false;
 
-    private boolean stend = false;
-    private boolean stend1 = false;
-    private boolean stend2 = false;
-    private boolean stend3 = false;
+    private boolean countz,counta,stend,stend1,stend2,stend3 = false;
+    private float i = 0;
+    private int vx = 0;
+    private float x = 0 ;
+    private float y = 195;
 
 
     public GameScreen(ScreenStack ss){
         this.ss = ss;
+
     }
 
+    @Override
+    public void wasShown() {
+        super.wasShown();
 
+
+        m = new Minutor(world,50,y);
+        layer.add(m.layer());
+
+    }
 
     @Override
     public void wasAdded() {
         super.wasAdded();
-
-        z = new zeus(world,0,0);
-        z1 = new zeus(world,0,0);
-        z2 = new zeus(world,0,0);
-        z3 = new zeus(world,0,0);
-
-        a = new ares(world,0,0);
-        a1 = new ares(world,0,0);
-        a2 = new ares(world,0,0);
-        a3 = new ares(world,0,0);
-
-
-        Vec2 gravity = new Vec2(0.0f,0.0f);
-        world = new World(gravity,true);
-        world.setWarmStarting(true);
-        world.setAutoClearForces(true);
-
 
         bgImage = assets().getImage("images/dun1.png");
         bgImage.addCallback(new Callback<Image>() {
@@ -90,6 +79,7 @@ public class GameScreen extends UIScreen {
 
         bgLayer = PlayN.graphics().createImageLayer(bgImage);
         layer.add(bgLayer);
+
 
         /////////////////////////////////////////////////////////
 
@@ -131,6 +121,7 @@ public class GameScreen extends UIScreen {
         layer.add(btLayer);
 
         btLayer.addListener(new Pointer.Adapter(){
+
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
@@ -230,6 +221,7 @@ public class GameScreen extends UIScreen {
         layer.add(btLayer);
 
         btLayer.addListener(new Pointer.Adapter(){
+
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
@@ -250,7 +242,6 @@ public class GameScreen extends UIScreen {
 
                 }
 
-
             }
         });
 
@@ -269,6 +260,30 @@ public class GameScreen extends UIScreen {
             }
         });
 
+        createworld();
+
+    }
+
+    private void createworld() {
+
+        z = new zeus(world,0,0);
+        z1 = new zeus(world,0,0);
+        z2 = new zeus(world,0,0);
+        z3 = new zeus(world,0,0);
+
+        a = new ares(world,0,0);
+        a1 = new ares(world,0,0);
+        a2 = new ares(world,0,0);
+        a3 = new ares(world,0,0);
+
+        m = new Minutor(world,0,0);
+
+
+        Vec2 gravity = new Vec2(0.0f,0.0f);
+        world = new World(gravity,true);
+        world.setWarmStarting(true);
+        world.setAutoClearForces(true);
+
         if(showDebugDraw){
             CanvasImage image = graphics().createImage(
                     (int) (width / GameScreen.M_PER_PIXEL),
@@ -281,21 +296,58 @@ public class GameScreen extends UIScreen {
             debugDraw.setFillAlpha(75);
             debugDraw.setStrokeWidth(2.0f);
             debugDraw.setFlags(DebugDraw.e_shapeBit |
-                              DebugDraw.e_jointBit  |
-                              DebugDraw.e_aabbBit);
+                    DebugDraw.e_jointBit  |
+                    DebugDraw.e_aabbBit);
             debugDraw.setCamera(0, 0, 1f / GameScreen.M_PER_PIXEL);
             world.setDebugDraw(debugDraw);
         }
 
     }
 
+
     @Override
     public void update(int delta) {
+
         super.update(delta);
+
         z.update(delta);
         z1.update(delta);
         z2.update(delta);
         z3.update(delta);
+
+        ////////////////////////
+
+        m.update(delta);
+
+        if(i < 1){
+            vx = 1;
+        }
+
+        if( i + m.layer().tx()>170){
+            y ++ ;
+            i -- ;
+        }
+
+        if( i + m.layer().ty()>400){
+            y -- ;
+            i ++ ;
+        }
+
+        if( i + m.layer().tx()>430){
+            y -- ;
+            i -- ;
+        }
+
+
+
+        i = i + vx * 1;
+            x = i;
+
+
+        m.layer().setTranslation(x,y);
+
+        /////////////////////////
+
 
         a.update(delta);
         a1.update(delta);
@@ -307,10 +359,14 @@ public class GameScreen extends UIScreen {
     @Override
     public void paint(Clock clock) {
         super.paint(clock);
+
         z.paint(clock);
         z1.paint(clock);
         z2.paint(clock);
         z3.paint(clock);
+
+        m.paint(clock);
+
 
         a.paint(clock);
         a1.paint(clock);
