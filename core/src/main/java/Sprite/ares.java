@@ -9,6 +9,7 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import playn.core.Layer;
+import playn.core.Pointer;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 
@@ -45,6 +46,19 @@ public class ares {
 
             }
         });
+
+
+        layer().addListener(new Pointer.Adapter(){
+            @Override
+            public void onPointerEnd(Pointer.Event event) {
+                super.onPointerEnd(event);
+
+                state = State.ATTACK;
+                spriteIndex = 0;
+                e = 0;
+
+            }
+        });
     }
     private Body initPhysicsBody(World world,float x,float y){
         BodyDef bodyDef = new BodyDef();
@@ -56,7 +70,7 @@ public class ares {
         ///EdgeShape shape = new EdgeShape();
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(96 * GameScreen.M_PER_PIXEL /2, sprite.layer().height()* GameScreen.M_PER_PIXEL /2);
+        shape.setAsBox(106 * GameScreen.M_PER_PIXEL /2, sprite.layer().height()* GameScreen.M_PER_PIXEL /2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.4f;
@@ -86,7 +100,7 @@ public class ares {
     }
 
     public enum State{
-        IDLE
+        IDLE,ATTACK
     }
 
     private State state=State.IDLE;
@@ -100,7 +114,12 @@ public class ares {
         e+=delta;
         if (e > 150){
             switch (state){
-                case IDLE: offset =0;
+                case IDLE: offset = 0;
+                    break;
+                case ATTACK: offset = 4;
+                    if (spriteIndex == 4){
+                        state = State.IDLE;
+                    }
                     break;
             }
             spriteIndex = offset + ((spriteIndex+1)%4);
