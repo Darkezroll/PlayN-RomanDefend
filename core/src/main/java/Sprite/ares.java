@@ -70,7 +70,7 @@ public class ares {
         ///EdgeShape shape = new EdgeShape();
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(106 * GameScreen.M_PER_PIXEL /2, sprite.layer().height()* GameScreen.M_PER_PIXEL /2);
+        shape.setAsBox(86 * GameScreen.M_PER_PIXEL /2, 80* GameScreen.M_PER_PIXEL /2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.4f;

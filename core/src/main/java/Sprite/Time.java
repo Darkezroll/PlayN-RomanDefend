@@ -1,5 +1,6 @@
 package Sprite;
 
+import Romandefense.core.GameScreen;
 import playn.core.Layer;
 import playn.core.util.Callback;
 
@@ -12,8 +13,9 @@ public class Time {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
+    private GameScreen g;
 
-    public boolean time = false;
+    public int time = 0;
 
     public Time(final float x,final float y){
         sprite = SpriteLoader.getSprite("images/Time.json");
@@ -53,14 +55,13 @@ public class Time {
 
     public void update(int delta){
         if (!hasLoaded) return;
-        e+=delta;
-        if (e > 3000){
+        e+= delta+delta;
+        if (e > 1100){
             switch (state){
                 case IDLE: offset = 0;
 
                     if (spriteIndex == 8){
-
-                        time = true;
+                        time = time + 1;
                     }
 
                     break;

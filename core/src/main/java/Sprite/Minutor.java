@@ -8,8 +8,8 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
+import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.Layer;
-import playn.core.Pointer;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 
@@ -21,6 +21,7 @@ public class Minutor {
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
     private Body body;
+    private Time t;
 
     private float n,b,c,d,f,g,h,i,j,k,l,m,o,p = 0;
 
@@ -47,6 +48,7 @@ public class Minutor {
             }
         });
 
+
     }
 
 
@@ -61,7 +63,7 @@ public class Minutor {
         ///EdgeShape shape = new EdgeShape();
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(66 * GameScreen.M_PER_PIXEL /2, sprite.layer().height()* GameScreen.M_PER_PIXEL /2);
+        shape.setAsBox(50 * GameScreen.M_PER_PIXEL /2, 50* GameScreen.M_PER_PIXEL /2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.4f;
@@ -91,6 +93,7 @@ public class Minutor {
         sprite.layer().setRotation(body.getAngle());
 
         ///////////////////////////////////////////////////////////////////////
+
 
         body.setTransform(new Vec2(5.9f,(n+2.6f)),body.getAngle());
 
@@ -247,8 +250,16 @@ public class Minutor {
             body.setTransform(new Vec2(20.0f+p,8.8f),body.getAngle());
         }
 
+        if (n > 62.9){
+
+            layer().destroy();
+        }
+
     }
 
+    public void contact(Contact contact) {
+
+    }
 
 
     public enum State{

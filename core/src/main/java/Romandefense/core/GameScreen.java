@@ -7,6 +7,7 @@ import Sprite.zeus;
 import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
+import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.*;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
@@ -27,23 +28,24 @@ public class GameScreen extends UIScreen {
 
     private World world;
     private DebugDrawBox2D debugDraw;
-    private boolean showDebugDraw = false;
+    private boolean showDebugDraw = true;
     private  ScreenStack ss;
     private Image bgImage,btImage;
     private Layer bgLayer,btLayer;
 
     private zeus z,z1,z2,z3,z4,z5,z6;
     private ares a,a1,a2,a3,a4,a5,a6;
-    private Minutor m;
+    private Minutor m,m1,m2,m3,m4,m5,m6,m7,m8,m9;
     private Time t;
+
+    public int u = 0;
 
 
     private boolean countz,counta,stend,stend1,stend2,stend3,stend4,stend5,stend6 = false;
 
     private float x = 50 ;
     private float y = 195;
-    private Minutor m1;
-    private Minutor m2;
+
     private int i;
 
 
@@ -61,11 +63,15 @@ public class GameScreen extends UIScreen {
         layer.add(t.layer());
 
         m = new Minutor(world,x,y);
-        layer.add(m.layer());
-
-
-
-
+        m1 = new Minutor(world,x,y);
+        m2 = new Minutor(world,x,y);
+        m3 = new Minutor(world,x,y);
+        m4 = new Minutor(world,x,y);
+        m5 = new Minutor(world,x,y);
+        m6 = new Minutor(world,x,y);
+        m7 = new Minutor(world,x,y);
+        m8 = new Minutor(world,x,y);
+        m9 = new Minutor(world,x,y);
 
 
     }
@@ -432,6 +438,110 @@ public class GameScreen extends UIScreen {
 
         world.step(0.033f, 10, 10);
 
+        if (t.time >= 0){
+
+            if (u == 0){
+
+                layer.add(m.layer());
+                u = 1;
+            }
+
+            m.update(delta);
+        }
+
+        if (t.time >= 1){
+
+            if (u == 1){
+
+                layer.add(m1.layer());
+                u = 2;
+            }
+
+            m1.update(delta);
+        }
+        if (t.time >= 2){
+
+            if (u == 2){
+
+                layer.add(m2.layer());
+                u = 3;
+            }
+
+            m2.update(delta);
+        }
+        if (t.time >= 3){
+
+            if (u == 3){
+
+                layer.add(m3.layer());
+                u = 4;
+            }
+
+            m3.update(delta);
+        }
+        if (t.time >= 4){
+
+            if (u == 4){
+
+                layer.add(m4.layer());
+                u = 5;
+            }
+
+            m4.update(delta);
+        }
+        if (t.time >= 5){
+
+            if (u == 5){
+
+                layer.add(m5.layer());
+                u = 6;
+            }
+
+            m5.update(delta);
+        }
+        if (t.time >= 6){
+
+            if (u == 6){
+
+                layer.add(m6.layer());
+                u = 7;
+            }
+
+            m6.update(delta);
+        }
+        if (t.time >= 7){
+
+            if (u == 7){
+
+                layer.add(m7.layer());
+                u = 8;
+            }
+
+            m7.update(delta);
+        }
+        if (t.time >= 8){
+
+            if (u == 8){
+
+                layer.add(m8.layer());
+                u = 9;
+            }
+
+            m8.update(delta);
+        }
+        if (t.time >= 9){
+
+            t.layer().destroy();
+
+            if (u == 9){
+
+                layer.add(m9.layer());
+                u = 10;
+            }
+
+            m9.update(delta);
+        }
+
         z.update(delta);
         z1.update(delta);
         z2.update(delta);
@@ -455,7 +565,7 @@ public class GameScreen extends UIScreen {
 
         t.update(delta);
 
-        m.update(delta);
+
 
 
     }
@@ -463,6 +573,19 @@ public class GameScreen extends UIScreen {
     @Override
     public void paint(Clock clock) {
         super.paint(clock);
+
+        m.paint(clock);
+        m1.paint(clock);
+        m2.paint(clock);
+        m3.paint(clock);
+        m4.paint(clock);
+        m5.paint(clock);
+        m6.paint(clock);
+        m7.paint(clock);
+        m8.paint(clock);
+        m9.paint(clock);
+
+        //////////////////////////////////////////
 
         z.paint(clock);
         z1.paint(clock);
@@ -481,10 +604,6 @@ public class GameScreen extends UIScreen {
         a4.paint(clock);
         a5.paint(clock);
         a6.paint(clock);
-
-        ///////////////////////////////////////////
-
-        m.paint(clock);
 
 
         if(showDebugDraw){

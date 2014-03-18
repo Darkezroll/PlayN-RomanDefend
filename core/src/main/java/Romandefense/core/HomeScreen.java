@@ -23,11 +23,11 @@ public class HomeScreen extends UIScreen{
     public void wasShown() {
         super.wasShown();
 
-        Image bgImage = assets().getImage("images/BGDEMO.png");
+        Image bgImage = assets().getImage("images/BG.png");
         ImageLayer bgLayer = graphics().createImageLayer(bgImage);
         layer.add(bgLayer);
 
-        btImage = assets().getImage("images/BGDEMO.png");
+        btImage = assets().getImage("images/start.png");
         btLayer = graphics().createImageLayer(btImage);
         btLayer.setTranslation(225, 330);
         layer.add(btLayer);
