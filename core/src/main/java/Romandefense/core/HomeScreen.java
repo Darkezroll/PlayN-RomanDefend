@@ -15,6 +15,8 @@ public class HomeScreen extends UIScreen{
     private Image btImage;
     private ImageLayer btLayer;
 
+    private Sound soundj = assets().getSound("sounds/intro");
+
     public HomeScreen(ScreenStack ss){
         this.ss = ss;
     }
@@ -22,6 +24,8 @@ public class HomeScreen extends UIScreen{
     @Override
     public void wasShown() {
         super.wasShown();
+
+        soundj.play();
 
         Image bgImage = assets().getImage("images/BG.png");
         ImageLayer bgLayer = graphics().createImageLayer(bgImage);
@@ -36,6 +40,8 @@ public class HomeScreen extends UIScreen{
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
+
+                soundj.stop();
 
                 Screen home = new StartScreen(ss);
                 ss.push(home);

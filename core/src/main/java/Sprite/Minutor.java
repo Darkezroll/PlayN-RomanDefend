@@ -62,7 +62,7 @@ public class Minutor {
         ///EdgeShape shape = new EdgeShape();
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(50 * GameScreen.M_PER_PIXEL /2, 50* GameScreen.M_PER_PIXEL /2);
+        shape.setAsBox(45 * GameScreen.M_PER_PIXEL /2, 45* GameScreen.M_PER_PIXEL /2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.4f;
@@ -249,7 +249,7 @@ public class Minutor {
             body.setTransform(new Vec2(20.0f+p,8.8f),body.getAngle());
         }
 
-        if (n > 64.9){
+        if (n > 63.5){
 
             layer().destroy();
             body().getWorld().destroyBody(body());
@@ -284,7 +284,7 @@ public class Minutor {
         if (!hasLoaded) return;
 
         e += delta;
-        if (e > 10){
+        if (e > 110){
             switch (state){
                 case WALK: offset = 0;
 

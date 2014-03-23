@@ -8,21 +8,28 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
+import playn.core.Assets;
 import playn.core.Layer;
 import playn.core.Pointer;
+import playn.core.Sound;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
+import tripleplay.game.UIScreen;
+
+import static playn.core.PlayN.assets;
 
 
-
-public class zeus {
+public class zeus extends UIScreen {
 
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
     private Body body;
     public int atk = 0;
-    private Minutor m;
+
+    private Sound soundj = assets().getSound("sounds/thunder");
+
+
 
     public zeus(final World world, final float x,final float y){
         sprite = SpriteLoader.getSprite("images/zeus.json");
@@ -53,13 +60,11 @@ public class zeus {
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
 
+                soundj.play();
                 state = State.ATTACK;
                 spriteIndex = 0;
                 e = 0;
-
                 atk +=1;
-
-                System.out.println(atk);
             }
         });
     }
@@ -73,7 +78,7 @@ public class zeus {
         ///EdgeShape shape = new EdgeShape();
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(86 * GameScreen.M_PER_PIXEL /2, 80* GameScreen.M_PER_PIXEL /2);
+        shape.setAsBox(86 * GameScreen.M_PER_PIXEL /2, 70* GameScreen.M_PER_PIXEL /2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.4f;

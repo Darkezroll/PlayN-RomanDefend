@@ -56,7 +56,7 @@ public class Time {
     public void update(int delta){
         if (!hasLoaded) return;
         e+= delta+delta;
-        if (e > 10){
+        if (e > 1200){
             switch (state){
                 case IDLE: offset = 0;
 
