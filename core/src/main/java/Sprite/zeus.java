@@ -21,6 +21,8 @@ public class zeus {
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
     private Body body;
+    public int atk = 0;
+    private Minutor m;
 
     public zeus(final World world, final float x,final float y){
         sprite = SpriteLoader.getSprite("images/zeus.json");
@@ -55,6 +57,9 @@ public class zeus {
                 spriteIndex = 0;
                 e = 0;
 
+                atk +=1;
+
+                System.out.println(atk);
             }
         });
     }

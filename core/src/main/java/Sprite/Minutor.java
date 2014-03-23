@@ -8,7 +8,6 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
-import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.Layer;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
@@ -47,8 +46,6 @@ public class Minutor {
 
             }
         });
-
-
     }
 
 
@@ -95,170 +92,171 @@ public class Minutor {
         ///////////////////////////////////////////////////////////////////////
 
 
-        body.setTransform(new Vec2(5.9f,(n+2.6f)),body.getAngle());
+        body.setTransform(new Vec2(5.9f,(n+0.6f)),body.getAngle());
 
-        if (b > 6.3){
+        if (b > 8.3){
 
             b = 0;
         }
-        if (n > 6.3){
+        if (n > 8.3){
 
             body.setTransform(new Vec2(5.9f-b,8.9f),body.getAngle());
         }
 
         ////////////////////////////////////////////////////////////////////////
 
-        if (c > 10.3){
+        if (c > 12.3){
 
             c = 0;
 
         }
-        if (n > 10.3){
+        if (n > 12.3){
 
             body.setTransform(new Vec2(1.9f,c+8.9f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (d > 14.1){
+        if (d > 16.1){
 
             d = 0;
 
         }
-        if (n > 14.1){
+        if (n > 16.1){
 
             body.setTransform(new Vec2(d+1.9f,12.7f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (f > 18.0){
+        if (f > 20.0){
 
             f = 0;
 
         }
-        if (n > 18.0){
+        if (n > 20.0){
 
             body.setTransform(new Vec2(5.8f,f+12.7f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (g > 20.2){
+        if (g > 22.2){
 
             g = 0;
 
         }
-        if (n > 20.2){
+        if (n > 22.2){
 
             body.setTransform(new Vec2(g+5.8f,14.9f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (h > 24.2){
+        if (h > 26.2){
 
             h = 0;
 
         }
-        if (n > 24.2){
+        if (n > 26.2){
 
             body.setTransform(new Vec2(9.8f,14.9f-h),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (i > 26.5){
+        if (i > 28.5){
 
             i = 0;
 
         }
-        if (n > 26.5){
+        if (n > 28.5){
 
             body.setTransform(new Vec2(i+9.8f,12.6f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (j > 28.7){
+        if (j > 30.7){
 
             j = 0;
 
         }
-        if (n > 28.7){
+        if (n > 30.7){
 
             body.setTransform(new Vec2(12.0f,12.6f-j),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (k > 34.7){
+        if (k > 36.7){
 
             k = 0;
 
         }
-        if (n > 34.7){
+        if (n > 36.7){
 
             body.setTransform(new Vec2(12.0f+k,6.6f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (l > 38.7){
+        if (l > 40.7){
 
             l = 0;
 
         }
-        if (n > 38.7){
+        if (n > 40.7){
 
             body.setTransform(new Vec2(16.0f,6.6f+l),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (m > 46.9){
+        if (m > 48.9){
 
             m = 0;
 
         }
-        if (n > 46.9){
+        if (n > 48.9){
 
             body.setTransform(new Vec2(16.0f+m,14.8f),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (o > 50.9){
+        if (o > 52.9){
 
             o = 0;
 
         }
-        if (n > 50.9){
+        if (n > 52.9){
 
             body.setTransform(new Vec2(20.0f,14.8f-o),body.getAngle());
         }
 
         //////////////////////////////////////////////////////////////////////////
 
-        if (p > 56.9){
+        if (p > 58.9){
 
             p = 0;
 
         }
-        if (n > 56.9){
+        if (n > 58.9){
 
             body.setTransform(new Vec2(20.0f+p,8.8f),body.getAngle());
         }
 
-        if (n > 62.9){
+        if (n > 64.9){
 
             layer().destroy();
+            body().getWorld().destroyBody(body());
         }
 
     }
 
-    public void contact(Contact contact) {
-
+    public Body body() {
+        return body;
     }
 
 

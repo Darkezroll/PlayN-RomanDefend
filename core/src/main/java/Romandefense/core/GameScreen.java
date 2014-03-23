@@ -7,7 +7,6 @@ import Sprite.zeus;
 import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
-import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.*;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
@@ -28,7 +27,7 @@ public class GameScreen extends UIScreen {
 
     private World world;
     private DebugDrawBox2D debugDraw;
-    private boolean showDebugDraw = true;
+    private boolean showDebugDraw = false;
     private  ScreenStack ss;
     private Image bgImage,btImage;
     private Layer bgLayer,btLayer;
@@ -37,16 +36,10 @@ public class GameScreen extends UIScreen {
     private ares a,a1,a2,a3,a4,a5,a6;
     private Minutor m,m1,m2,m3,m4,m5,m6,m7,m8,m9;
     private Time t;
-
-    public int u = 0;
+    public int dcheck = 0;
 
 
     private boolean countz,counta,stend,stend1,stend2,stend3,stend4,stend5,stend6 = false;
-
-    private float x = 50 ;
-    private float y = 195;
-
-    private int i;
 
 
     public GameScreen(ScreenStack ss){
@@ -55,28 +48,6 @@ public class GameScreen extends UIScreen {
 
     //////////////////////////////////////////////////////////
 
-    @Override
-    public void wasShown() {
-        super.wasShown();
-
-        t = new Time(160,120);
-        layer.add(t.layer());
-
-        m = new Minutor(world,x,y);
-        m1 = new Minutor(world,x,y);
-        m2 = new Minutor(world,x,y);
-        m3 = new Minutor(world,x,y);
-        m4 = new Minutor(world,x,y);
-        m5 = new Minutor(world,x,y);
-        m6 = new Minutor(world,x,y);
-        m7 = new Minutor(world,x,y);
-        m8 = new Minutor(world,x,y);
-        m9 = new Minutor(world,x,y);
-
-
-    }
-
-    //////////////////////////////////////////////////////////
 
     @Override
     public void wasAdded() {
@@ -372,7 +343,40 @@ public class GameScreen extends UIScreen {
             }
         });
 
+
         createworld();
+
+        t = new Time(160,120);
+        layer.add(t.layer());
+
+        m = new Minutor(world,0,0);
+        m1 = new Minutor(world,0,0);
+        m2 = new Minutor(world,0,0);
+        m3 = new Minutor(world,0,0);
+        m4 = new Minutor(world,0,0);
+        m5 = new Minutor(world,0,0);
+        m6 = new Minutor(world,0,0);
+        m7 = new Minutor(world,0,0);
+        m8 = new Minutor(world,0,0);
+        m9 = new Minutor(world,0,0);
+
+        layer.add(m.layer());
+        layer.add(m1.layer());
+        layer.add(m2.layer());
+        layer.add(m3.layer());
+        layer.add(m4.layer());
+        layer.add(m5.layer());
+        layer.add(m6.layer());
+        layer.add(m7.layer());
+        layer.add(m8.layer());
+        layer.add(m9.layer());
+
+
+        btImage = assets().getImage("images/dun1hid.png");
+        btLayer = graphics().createImageLayer(btImage);
+        layer.add(btLayer);
+
+        btLayer.setTranslation(128, 0);
 
     }
 
@@ -398,10 +402,6 @@ public class GameScreen extends UIScreen {
         a6 = new ares(world,0,0);
 
         ///////////////////////////////////////////
-
-        m = new Minutor(world,0,0);
-
-        //////////////////////////////////////////
 
 
         Vec2 gravity = new Vec2(0.0f,0.0f);
@@ -440,104 +440,44 @@ public class GameScreen extends UIScreen {
 
         if (t.time >= 0){
 
-            if (u == 0){
-
-                layer.add(m.layer());
-                u = 1;
-            }
-
             m.update(delta);
         }
 
         if (t.time >= 1){
 
-            if (u == 1){
-
-                layer.add(m1.layer());
-                u = 2;
-            }
-
             m1.update(delta);
         }
         if (t.time >= 2){
-
-            if (u == 2){
-
-                layer.add(m2.layer());
-                u = 3;
-            }
 
             m2.update(delta);
         }
         if (t.time >= 3){
 
-            if (u == 3){
-
-                layer.add(m3.layer());
-                u = 4;
-            }
-
             m3.update(delta);
         }
         if (t.time >= 4){
-
-            if (u == 4){
-
-                layer.add(m4.layer());
-                u = 5;
-            }
 
             m4.update(delta);
         }
         if (t.time >= 5){
 
-            if (u == 5){
-
-                layer.add(m5.layer());
-                u = 6;
-            }
-
             m5.update(delta);
         }
         if (t.time >= 6){
-
-            if (u == 6){
-
-                layer.add(m6.layer());
-                u = 7;
-            }
 
             m6.update(delta);
         }
         if (t.time >= 7){
 
-            if (u == 7){
-
-                layer.add(m7.layer());
-                u = 8;
-            }
-
             m7.update(delta);
         }
         if (t.time >= 8){
-
-            if (u == 8){
-
-                layer.add(m8.layer());
-                u = 9;
-            }
 
             m8.update(delta);
         }
         if (t.time >= 9){
 
             t.layer().destroy();
-
-            if (u == 9){
-
-                layer.add(m9.layer());
-                u = 10;
-            }
 
             m9.update(delta);
         }
@@ -565,6 +505,15 @@ public class GameScreen extends UIScreen {
 
         t.update(delta);
 
+        tower1();
+        tower2();
+        tower3();
+        tower4();
+        tower5();
+        tower6();
+        tower7();
+
+        System.out.println(dcheck);
 
 
 
@@ -610,5 +559,2580 @@ public class GameScreen extends UIScreen {
             debugDraw.getCanvas().clear();
             world.drawDebugData();
         }
+    }
+
+    public void tower1(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 1 && t.time < 3){
+
+            if (z.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 2 && t.time < 4){
+
+            if (z.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 3 && t.time < 5){
+
+            if (z.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 4 && t.time < 6){
+
+            if (z.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 5 && t.time < 7){
+
+            if (z.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 6 && t.time < 8){
+
+            if (z.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 7 && t.time < 9){
+
+            if (z.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (z.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (z.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (z.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z.atk > 4){
+
+            z.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 1 && t.time < 3){
+
+            if (a.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 2 && t.time < 4){
+
+            if (a.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 3 && t.time < 5){
+
+            if (a.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 4 && t.time < 6){
+
+            if (a.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 5 && t.time < 7){
+
+            if (a.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 6 && t.time < 8){
+
+            if (a.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 7 && t.time < 9){
+
+            if (a.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (a.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (a.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (a.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a.atk > 3){
+
+            a.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+
+    }
+
+    public void tower2(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 2 && t.time < 4){
+
+            if (z1.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 3 && t.time < 5){
+
+            if (z1.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 4 && t.time < 6){
+
+            if (z1.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 5 && t.time < 7){
+
+            if (z1.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 6 && t.time < 8){
+
+            if (z1.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 7 && t.time < 9){
+
+            if (z1.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (z1.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (z1.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (z1.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (z.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z1.atk > 4){
+
+            z1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 2 && t.time < 4){
+
+            if (a1.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 3 && t.time < 5){
+
+            if (a1.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 4 && t.time < 6){
+
+            if (a1.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 5 && t.time < 7){
+
+            if (a1.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 6 && t.time < 8){
+
+            if (a.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 7 && t.time < 9){
+
+            if (a1.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (a1.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (a1.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (a1.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (a1.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a1.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a1.atk > 3){
+
+            a1.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+    }
+
+    public void tower3(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 5 && t.time < 7){
+
+            if (z2.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 6 && t.time < 8){
+
+            if (z2.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 7 && t.time < 9){
+
+            if (z2.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (z2.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (z2.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (z2.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (z2.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (z2.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (z2.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (z2.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z2.atk > 4){
+
+            z2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 5 && t.time < 7){
+
+            if (a2.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 6 && t.time < 8){
+
+            if (a2.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 7 && t.time < 9){
+
+            if (a2.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (a2.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (a2.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (a2.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (a2.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (a2.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (a2.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (a2.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a2.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a2.atk > 3){
+
+            a2.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+    }
+
+    public void tower4(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (z3.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (z3.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (z3.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (z3.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (z3.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (z3.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (z3.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (z3.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (z3.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (z3.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z3.atk > 4){
+
+            z3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 8 && t.time < 10){
+
+            if (a3.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (a3.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (a3.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (a3.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (a3.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (a3.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (a3.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (a3.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (a3.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (a3.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a3.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a3.atk > 3){
+
+            a3.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+    }
+
+    public void tower5(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (z4.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (z4.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (z4.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (z4.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (z4.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (z4.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (z4.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (z4.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (z4.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 18 && t.time < 20){
+
+            if (z4.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z4.atk > 4){
+
+            z4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 9 && t.time < 11){
+
+            if (a4.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (a4.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (a4.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (a4.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (a4.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (a.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (a4.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (a4.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (a4.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 18 && t.time < 20){
+
+            if (a4.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a4.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a4.atk > 3){
+
+            a4.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+    }
+
+    public void tower6(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (z5.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (z5.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (z5.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (z5.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (z5.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (z5.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (z5.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (z5.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 18 && t.time < 20){
+
+            if (z5.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 19 && t.time < 21){
+
+            if (z5.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z5.atk > 4){
+
+            z5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 10 && t.time < 12){
+
+            if (a5.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (a5.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (a5.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (a5.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (a5.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (a5.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (a5.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (a5.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 18 && t.time < 20){
+
+            if (a5.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 19 && t.time < 21){
+
+            if (a5.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a5.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a5.atk > 3){
+
+            a5.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+    }
+
+    public void tower7(){
+
+        /////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (z6.atk == 4){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (z6.atk == 4){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (z6.atk == 4){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (z6.atk == 4){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (z6.atk == 4){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (z6.atk == 4){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (z6.atk == 4){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 18 && t.time < 20){
+
+            if (z6.atk == 4){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 19 && t.time < 21){
+
+            if (z6.atk == 4){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 20 && t.time < 22){
+
+            if (z6.atk == 4){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                z6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (z6.atk > 4){
+
+            z6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+
+        if (t.time > 11 && t.time < 13){
+
+            if (a6.atk == 3){
+
+                m.layer().destroy();
+                m.body().getWorld().destroyBody(m.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 12 && t.time < 14){
+
+            if (a6.atk == 3){
+
+                m1.layer().destroy();
+                m1.body().getWorld().destroyBody(m1.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 13 && t.time < 15){
+
+            if (a6.atk == 3){
+
+                m2.layer().destroy();
+                m2.body().getWorld().destroyBody(m2.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 14 && t.time < 16){
+
+            if (a6.atk == 3){
+
+                m3.layer().destroy();
+                m3.body().getWorld().destroyBody(m3.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 15 && t.time < 17){
+
+            if (a6.atk == 3){
+
+                m4.layer().destroy();
+                m4.body().getWorld().destroyBody(m4.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 16 && t.time < 18){
+
+            if (a6.atk == 3){
+
+                m5.layer().destroy();
+                m5.body().getWorld().destroyBody(m5.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 17 && t.time < 19){
+
+            if (a6.atk == 3){
+
+                m6.layer().destroy();
+                m6.body().getWorld().destroyBody(m6.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 18 && t.time < 20){
+
+            if (a6.atk == 3){
+
+                m7.layer().destroy();
+                m7.body().getWorld().destroyBody(m7.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 19 && t.time < 21){
+
+            if (a6.atk == 3){
+
+                m8.layer().destroy();
+                m8.body().getWorld().destroyBody(m8.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
+        if (t.time > 20 && t.time < 22){
+
+            if (a6.atk == 3){
+
+                m9.layer().destroy();
+                m9.body().getWorld().destroyBody(m9.body());
+                a6.atk = 0;
+                dcheck += 1;
+            }
+        }
+
+        if (a6.atk > 3){
+
+            a6.atk = 0;
+        }
+
+        //////////////////////////////////////////////////
+
     }
 }

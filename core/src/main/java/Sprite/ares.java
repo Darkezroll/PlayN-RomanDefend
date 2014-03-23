@@ -21,6 +21,7 @@ public class ares {
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
     private Body body;
+    public int atk = 0;
 
     public ares(final World world, final float x,final float y){
         sprite = SpriteLoader.getSprite("images/ares.json");
@@ -56,6 +57,10 @@ public class ares {
                 state = State.ATTACK;
                 spriteIndex = 0;
                 e = 0;
+
+                atk +=1;
+
+                System.out.println(atk);
 
             }
         });
