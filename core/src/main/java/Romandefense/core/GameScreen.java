@@ -474,12 +474,18 @@ public class GameScreen extends UIScreen {
         if (t.time >= 8){
 
             m8.update(delta);
+
         }
         if (t.time >= 9){
 
             t.layer().destroy();
 
             m9.update(delta);
+
+            if (m9.gameend == true){
+
+                ss.push(new Win(ss));
+            }
         }
 
         z.update(delta);
