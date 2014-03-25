@@ -10,6 +10,7 @@ import org.jbox2d.dynamics.*;
 import playn.core.*;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
+import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 import tripleplay.game.UIScreen;
 import static playn.core.PlayN.assets;
@@ -40,8 +41,11 @@ public class GameScreen extends UIScreen {
 
     private Sound soundj = assets().getSound("sounds/dun1");
     private Sound soundj1 = assets().getSound("sounds/minutor");
+    private Sound soundj2 = assets().getSound("sounds/dead");
 
     private boolean countz,counta,stend,stend1,stend2,stend3,stend4,stend5,stend6 = false;
+    private boolean moneycheck1,moneycheck2,moneycheck3,moneycheck4,moneycheck5,
+                    moneycheck6,moneycheck7,moneycheck8,moneycheck9,moneycheck10 = false;
 
     private int time1,time2,time3,time4,time5,time6,time7,time8,time9,time10 = 0;
     private int t1,t2,t3,t4,t5,t6,t7,t8,t9,t10 = 0;
@@ -51,6 +55,8 @@ public class GameScreen extends UIScreen {
     private int w1,w2,w3,w4,w5,w6,w7,w8,w9,w10 = 0;
     private int e1,e2,e3,e4,e5,e6,e7,e8,e9,e10 = 0;
     private boolean start = false;
+    private int money = 0;
+
 
 
     public GameScreen(ScreenStack ss){
@@ -65,6 +71,7 @@ public class GameScreen extends UIScreen {
         super.wasAdded();
 
         soundj.play();
+        soundj.setLooping(true);
 
         bgImage = assets().getImage("images/dun1.png");
         bgImage.addCallback(new Callback<Image>() {
@@ -95,10 +102,11 @@ public class GameScreen extends UIScreen {
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
 
-                if (start == false || dcheck == 2 || dcheck == 4 || dcheck == 6 || dcheck == 8 || dcheck == 10){
+                if (start == false || money >=100){
 
                     countz = true;
                     start = true;
+                    money -= 100;
 
                 }
             }
@@ -116,9 +124,10 @@ public class GameScreen extends UIScreen {
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
 
-                if (dcheck == 3 || dcheck == 6 || dcheck == 9){
+                if (money >= 150){
 
                     counta = true;
+                    money -= 150;
 
                 }
             }
@@ -358,7 +367,8 @@ public class GameScreen extends UIScreen {
             @Override
             public void onPointerEnd(Pointer.Event event) {
 
-                ss.remove(GameScreen.this);
+                Screen start = new StartScreen(ss);
+                ss.push(start);
             }
         });
 
@@ -558,6 +568,8 @@ public class GameScreen extends UIScreen {
         tower7();
 
         score();
+        money();
+        checkmoney();
 
     }
 
@@ -603,17 +615,25 @@ public class GameScreen extends UIScreen {
         }
     }
 
+    ///////////////////////////////////////////
+
     public void tower1(){
 
         /////////////////////////////////////////////////
 
         if (t.time > 0 && t.time < 2){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time1 == 0){
+
+                    dcheck += 1;
+                    time1 += 1;
+                }
             }
         }
 
@@ -622,9 +642,10 @@ public class GameScreen extends UIScreen {
             time1 += 1;
         }
 
-        if (z.atk > 4 || time1 == 1){
+        if (z.atk > 6 || time1 == 2 || time1 == 1){
 
-                z.atk = 0;
+            z.atk = 0;
+            time1 +=2;
 
         }
 
@@ -632,11 +653,18 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 1 && t.time < 3){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m1.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time2 == 0){
+
+                    dcheck += 1;
+                    time2 +=1;
+
+                }
             }
         }
 
@@ -645,9 +673,10 @@ public class GameScreen extends UIScreen {
             time2 += 1;
         }
 
-        if (z.atk > 4 || time2 == 1){
+        if (z.atk > 6 || time2 == 2 || time2 == 1){
 
             z.atk = 0;
+            time2 += 2;
 
         }
 
@@ -656,11 +685,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 2 && t.time < 4){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m2.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time3 == 0){
+
+                    dcheck += 1;
+                    time3 +=1;
+                }
             }
         }
 
@@ -669,9 +704,10 @@ public class GameScreen extends UIScreen {
             time3 += 1;
         }
 
-        if (z.atk > 4 || time3 == 1){
+        if (z.atk > 6 || time3 == 2 || time3 == 1){
 
             z.atk = 0;
+            time3 += 2;
 
         }
 
@@ -679,11 +715,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 3 && t.time < 5){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m3.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time4 == 0){
+
+                    dcheck += 1;
+                    time4 +=1;
+                }
             }
         }
 
@@ -692,20 +734,27 @@ public class GameScreen extends UIScreen {
             time4 += 1;
         }
 
-        if (z.atk > 4 || time4 == 1){
+        if (z.atk > 6 || time4 == 2 || time4 == 1){
 
             z.atk = 0;
+            time4 += 2;
         }
 
         //////////////////////////////////////////////////
 
         if (t.time > 4 && t.time < 6){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m4.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time5 == 0){
+
+                    dcheck += 1;
+                    time5 +=1;
+                }
             }
         }
 
@@ -714,9 +763,10 @@ public class GameScreen extends UIScreen {
             time5 += 1;
         }
 
-        if (z.atk > 4 || time5 == 1){
+        if (z.atk > 6 || time5 == 2 || time5 == 1){
 
             z.atk = 0;
+            time5 += 2;
 
         }
 
@@ -724,11 +774,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m5.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time6 == 0){
+
+                    dcheck += 1;
+                    time6 +=1;
+                }
             }
         }
 
@@ -737,9 +793,10 @@ public class GameScreen extends UIScreen {
             time6 += 1;
         }
 
-        if (z.atk > 4 || time6 == 1){
+        if (z.atk > 6 || time6 == 2 || time6 == 1){
 
             z.atk = 0;
+            time6 += 2;
 
         }
 
@@ -747,11 +804,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m6.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time7 == 0){
+
+                    dcheck += 1;
+                    time7 +=1;
+                }
             }
         }
 
@@ -760,9 +823,10 @@ public class GameScreen extends UIScreen {
             time7 += 1;
         }
 
-        if (z.atk > 4 || time7 == 1){
+        if (z.atk > 6 || time7 == 2 || time7 == 1){
 
             z.atk = 0;
+            time7 += 2;
 
         }
 
@@ -770,11 +834,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m7.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time8 == 0){
+
+                    dcheck += 1;
+                    time8 +=1;
+                }
             }
         }
 
@@ -783,20 +853,27 @@ public class GameScreen extends UIScreen {
             time8 += 1;
         }
 
-        if (z.atk > 4 || time8 == 1){
+        if (z.atk > 6 || time8 == 2 || time8 == 1){
 
             z.atk = 0;
+            time8 += 2;
         }
 
         //////////////////////////////////////////////////
 
         if (t.time > 8 && t.time < 10){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m8.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time9 == 0){
+
+                    dcheck += 1;
+                    time9 +=1;
+                }
             }
         }
 
@@ -805,9 +882,10 @@ public class GameScreen extends UIScreen {
             time9 += 1;
         }
 
-        if (z.atk > 4 || time9 == 1){
+        if (z.atk > 6 || time9 == 2 || time9 == 1){
 
             z.atk = 0;
+            time9 += 2;
 
         }
 
@@ -815,11 +893,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m9.layer().destroy();
                 z.atk = 0;
-                dcheck += 1;
+
+                if (time10 == 0){
+
+                    dcheck += 1;
+                    time10 +=1;
+                }
             }
         }
 
@@ -828,23 +912,29 @@ public class GameScreen extends UIScreen {
             time10 += 1;
         }
 
-        if (z.atk > 4 || time10 == 1){
+        if (z.atk > 6 || time10 == 2 || time10 == 1){
 
             z.atk = 0;
+            time10 += 2;
 
         }
 
-        //////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
-        ////////////////////////////////////////////////////////////////
 
         if (t.time > 0 && t.time < 2){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time1 == 0){
+
+                    dcheck += 1;
+                    time1 += 1;
+                }
             }
         }
 
@@ -853,9 +943,10 @@ public class GameScreen extends UIScreen {
             time1 += 1;
         }
 
-        if (a.atk > 3 || time1 == 1){
+        if (a.atk > 5 || time1 == 2 || time1 == 1){
 
             a.atk = 0;
+            time1 += 2;
 
         }
 
@@ -863,11 +954,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 1 && t.time < 3){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m1.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time2 == 0){
+
+                    dcheck += 1;
+                    time2 += 1;
+                }
             }
         }
 
@@ -876,9 +973,10 @@ public class GameScreen extends UIScreen {
             time2 += 1;
         }
 
-        if (a.atk > 3 || time2 == 1){
+        if (a.atk > 5 || time2 == 2 || time2 == 1){
 
             a.atk = 0;
+            time2 += 2;
 
         }
 
@@ -886,11 +984,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 2 && t.time < 4){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m2.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time3 == 0){
+
+                    dcheck += 1;
+                    time3 += 1;
+                }
             }
         }
 
@@ -899,9 +1003,10 @@ public class GameScreen extends UIScreen {
             time3 += 1;
         }
 
-        if (a.atk > 3 || time3 == 1){
+        if (a.atk > 5 || time3 == 2 || time3 == 1){
 
             a.atk = 0;
+            time3 += 2;
 
         }
 
@@ -909,11 +1014,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 3 && t.time < 5){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m3.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time4 == 0){
+
+                    dcheck += 1;
+                    time4 += 1;
+                }
             }
         }
 
@@ -922,9 +1033,10 @@ public class GameScreen extends UIScreen {
             time4 += 1;
         }
 
-        if (a.atk > 3 || time4 == 1){
+        if (a.atk > 5 || time4 == 2 || time4 == 1){
 
             a.atk = 0;
+            time4 += 2;
 
         }
 
@@ -932,11 +1044,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m4.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time5 == 0){
+
+                    dcheck += 1;
+                    time5 += 1;
+                }
             }
         }
 
@@ -945,9 +1063,10 @@ public class GameScreen extends UIScreen {
             time5 += 1;
         }
 
-        if (a.atk > 3 || time5 == 1){
+        if (a.atk > 5 || time5 == 2 || time5 == 1){
 
             a.atk = 0;
+            time5 += 2;
 
         }
 
@@ -955,11 +1074,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m5.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time6 == 0){
+
+                    dcheck += 1;
+                    time6 += 1;
+                }
             }
         }
 
@@ -968,9 +1093,10 @@ public class GameScreen extends UIScreen {
             time6 += 1;
         }
 
-        if (a.atk > 3 || time6 == 1){
+        if (a.atk > 5 || time6 == 2 || time6 == 1){
 
             a.atk = 0;
+            time6 += 2;
 
         }
 
@@ -978,11 +1104,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m6.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time7 == 0){
+
+                    dcheck += 1;
+                    time7 += 1;
+                }
             }
         }
 
@@ -991,9 +1123,10 @@ public class GameScreen extends UIScreen {
             time7 += 1;
         }
 
-        if (a.atk > 3 || time7 == 1){
+        if (a.atk > 5 || time7 == 2 || time7 == 1){
 
             a.atk = 0;
+            time7 += 2;
 
         }
 
@@ -1001,11 +1134,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m7.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time8 == 0){
+
+                    dcheck += 1;
+                    time8 += 1;
+                }
             }
         }
 
@@ -1014,9 +1153,10 @@ public class GameScreen extends UIScreen {
             time8 += 1;
         }
 
-        if (a.atk > 3 || time8 == 1){
+        if (a.atk > 5 || time8 == 2 || time8 == 1){
 
             a.atk = 0;
+            time8 += 2;
 
         }
 
@@ -1024,11 +1164,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m8.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time9 == 0){
+
+                    dcheck += 1;
+                    time9 += 1;
+                }
             }
         }
 
@@ -1037,9 +1183,10 @@ public class GameScreen extends UIScreen {
             time9 += 1;
         }
 
-        if (a.atk > 3 || time9 == 1){
+        if (a.atk > 5 || time9 == 2 || time9 == 1){
 
             a.atk = 0;
+            time9 += 2;
 
         }
 
@@ -1047,11 +1194,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m9.layer().destroy();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (time10 == 0){
+
+                    dcheck += 1;
+                    time10 += 1;
+                }
             }
         }
 
@@ -1060,29 +1213,30 @@ public class GameScreen extends UIScreen {
             time10 += 1;
         }
 
-        if (a.atk > 3 || time10 == 1){
+        if (a.atk > 5 || time10 == 2 || time10 == 1){
 
             a.atk = 0;
+            time10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
-
-
     }
 
     public void tower2(){
 
-        /////////////////////////////////////////////////
 
         if (t.time > 1 && t.time < 3){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t1 == 0){
+
+                    dcheck += 1;
+                    t1 += 1;
+                }
             }
         }
 
@@ -1091,9 +1245,10 @@ public class GameScreen extends UIScreen {
             t1 += 1;
         }
 
-        if (z1.atk > 4 || t1 == 1){
+        if (z1.atk > 6 || t1 == 2 || t1 == 1){
 
             z1.atk = 0;
+            t1 += 2;
 
         }
 
@@ -1101,12 +1256,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 2 && t.time < 4){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t2 == 0){
+
+                    dcheck += 1;
+                    t2 += 1;
+                }
             }
         }
 
@@ -1115,9 +1275,10 @@ public class GameScreen extends UIScreen {
             t2 += 1;
         }
 
-        if (z1.atk > 4 || t2 == 1){
+        if (z1.atk > 6 || t2 == 2 || t2 == 1){
 
             z1.atk = 0;
+            t2 += 2;
 
         }
 
@@ -1125,12 +1286,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 3 && t.time < 5){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t3 == 0){
+
+                    dcheck += 1;
+                    t3 += 1;
+                }
             }
         }
 
@@ -1139,9 +1305,10 @@ public class GameScreen extends UIScreen {
             t3 += 1;
         }
 
-        if (z1.atk > 4 || t3 == 1){
+        if (z1.atk > 6 || t3 == 2 || t3 == 1){
 
             z1.atk = 0;
+            t3 += 2;
 
         }
 
@@ -1149,12 +1316,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t4 == 0){
+
+                    dcheck += 1;
+                    t4 += 1;
+                }
             }
         }
 
@@ -1163,9 +1335,10 @@ public class GameScreen extends UIScreen {
             t4 += 1;
         }
 
-        if (z1.atk > 4 || t4 == 1){
+        if (z1.atk > 6 || t4 == 2 || t4 == 1){
 
             z1.atk = 0;
+            t4 += 2;
 
         }
 
@@ -1173,12 +1346,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t5 == 0){
+
+                    dcheck += 1;
+                    t5 += 1;
+                }
             }
         }
 
@@ -1187,9 +1365,10 @@ public class GameScreen extends UIScreen {
             t5 += 1;
         }
 
-        if (z1.atk > 4 || t5 == 1){
+        if (z1.atk > 6 || t5 == 2 || t5 == 1){
 
             z1.atk = 0;
+            t5 += 2;
 
         }
 
@@ -1197,12 +1376,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t6 == 0){
+
+                    dcheck += 1;
+                    t6 += 1;
+                }
             }
         }
 
@@ -1211,9 +1395,10 @@ public class GameScreen extends UIScreen {
             t6 += 1;
         }
 
-        if (z1.atk > 4 || t6 == 1){
+        if (z1.atk > 6 || t6 == 2 || t6 == 1){
 
             z1.atk = 0;
+            t6 += 2;
 
         }
 
@@ -1221,12 +1406,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t7 == 0){
+
+                    dcheck += 1;
+                    t7 += 1;
+                }
             }
         }
 
@@ -1235,9 +1425,10 @@ public class GameScreen extends UIScreen {
             t7 += 1;
         }
 
-        if (z1.atk > 4 || t7 == 1){
+        if (z1.atk > 6 || t7 == 2 || t7 == 1){
 
             z1.atk = 0;
+            t7 += 2;
 
         }
 
@@ -1245,12 +1436,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t8 == 0){
+
+                    dcheck += 1;
+                    t8 += 1;
+                }
             }
         }
 
@@ -1259,9 +1455,10 @@ public class GameScreen extends UIScreen {
             t8 += 1;
         }
 
-        if (z1.atk > 4 || t8 == 1){
+        if (z1.atk > 6 || t8 == 2 || t8 == 1){
 
             z1.atk = 0;
+            t8 += 2;
 
         }
 
@@ -1269,12 +1466,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z1.atk == 4){
+            if (z1.atk == 6){
 
+                soundj2.play();
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t9 == 0){
+
+                    dcheck += 1;
+                    t9 += 1;
+                }
             }
         }
 
@@ -1283,9 +1485,10 @@ public class GameScreen extends UIScreen {
             t9 += 1;
         }
 
-        if (z1.atk > 4 || t9 == 1){
+        if (z1.atk > 6 || t9 == 2 || t9 == 1){
 
             z1.atk = 0;
+            t9 += 2;
 
         }
 
@@ -1293,12 +1496,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (z.atk == 4){
+            if (z.atk == 6){
 
+                soundj2.play();
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
                 z1.atk = 0;
-                dcheck += 1;
+
+                if (t10 == 0){
+
+                    dcheck += 1;
+                    t10 += 1;
+                }
             }
         }
 
@@ -1307,24 +1515,28 @@ public class GameScreen extends UIScreen {
             t10 += 1;
         }
 
-        if (z1.atk > 4 || t10 == 1){
+        if (z1.atk > 6 || t10 == 2 || t10 == 1){
 
             z1.atk = 0;
+            t10 +=2;
 
         }
 
-        //////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////
 
         if (t.time > 1 && t.time < 3){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t1 == 0){
+
+                    dcheck += 1;
+                    t1 += 1;
+                }
             }
         }
 
@@ -1333,9 +1545,10 @@ public class GameScreen extends UIScreen {
             t1 += 1;
         }
 
-        if (a1.atk > 3 || t1 == 1){
+        if (a1.atk > 5 || t1 == 2 || t1 == 1){
 
             a1.atk = 0;
+            t1 += 1;
 
         }
 
@@ -1343,12 +1556,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 2 && t.time < 4){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t2 == 0){
+
+                    dcheck += 1;
+                    t2 += 1;
+                }
             }
         }
 
@@ -1357,9 +1575,10 @@ public class GameScreen extends UIScreen {
             t2 += 1;
         }
 
-        if (a1.atk > 3 || t2 == 1){
+        if (a1.atk > 5 || t2 == 2 || t2 == 1){
 
             a1.atk = 0;
+            t2 += 2;
 
         }
 
@@ -1367,12 +1586,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 3 && t.time < 5){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t3 == 0){
+
+                    dcheck += 1;
+                    t3 += 1;
+                }
             }
         }
 
@@ -1381,9 +1605,10 @@ public class GameScreen extends UIScreen {
             t3 += 1;
         }
 
-        if (a1.atk > 3 || t3 == 1){
+        if (a1.atk > 5 || t3 == 2 || t3 == 1){
 
             a1.atk = 0;
+            t3 += 2;
 
         }
 
@@ -1391,12 +1616,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t4 == 0){
+
+                    dcheck += 1;
+                    t4 += 1;
+                }
             }
         }
 
@@ -1405,9 +1635,10 @@ public class GameScreen extends UIScreen {
             t4 += 1;
         }
 
-        if (a1.atk > 3 || t4 == 1){
+        if (a1.atk > 5 || t4 == 2 || t4 == 1){
 
             a1.atk = 0;
+            t4 += 2;
 
         }
 
@@ -1415,12 +1646,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
+                soundj2.play();
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t5 == 0){
+
+                    dcheck += 1;
+                    t5 += 1;
+                }
             }
         }
 
@@ -1429,9 +1665,10 @@ public class GameScreen extends UIScreen {
             t5 += 1;
         }
 
-        if (a1.atk > 3 || t5 == 1){
+        if (a1.atk > 5 || t5 == 2 || t5 == 1){
 
             a1.atk = 0;
+            t5 += 2;
 
         }
 
@@ -1439,12 +1676,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t6 == 0){
+
+                    dcheck += 1;
+                    t6 += 1;
+                }
             }
         }
 
@@ -1453,9 +1695,10 @@ public class GameScreen extends UIScreen {
             t6 += 1;
         }
 
-        if (a1.atk > 3 || t6 == 1){
+        if (a1.atk > 5 || t6 == 2 || t6 == 1){
 
             a1.atk = 0;
+            t6 += 2;
 
         }
 
@@ -1463,12 +1706,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t7 == 0){
+
+                    dcheck += 1;
+                    t7 += 1;
+                }
             }
         }
 
@@ -1477,9 +1725,10 @@ public class GameScreen extends UIScreen {
             t7 += 1;
         }
 
-        if (a1.atk > 3 || t7 == 1){
+        if (a1.atk > 5 || t7 == 2 || t7 == 1){
 
             a1.atk = 0;
+            t7 += 2;
 
         }
 
@@ -1487,12 +1736,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t8 == 0){
+
+                    dcheck += 1;
+                    t8 += 1;
+                }
             }
         }
 
@@ -1501,9 +1755,10 @@ public class GameScreen extends UIScreen {
             t8 += 1;
         }
 
-        if (a1.atk > 3 || t8 == 1){
+        if (a1.atk > 5 || t8 == 2 || t8 == 1){
 
             a1.atk = 0;
+            t8 += 2;
 
         }
 
@@ -1511,12 +1766,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t9 == 0){
+
+                    dcheck += 1;
+                    t9 += 1;
+                }
             }
         }
 
@@ -1525,9 +1785,10 @@ public class GameScreen extends UIScreen {
             t9 += 1;
         }
 
-        if (a1.atk > 3 || t9 == 1){
+        if (a1.atk > 5 || t9 == 2 || t9 == 1){
 
             a1.atk = 0;
+            t9 += 2;
 
         }
 
@@ -1535,12 +1796,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (a1.atk == 3){
+            if (a1.atk == 5){
 
+                soundj2.play();
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
                 a1.atk = 0;
-                dcheck += 1;
+
+                if (t10 == 0){
+
+                    dcheck += 1;
+                    t10 += 1;
+                }
             }
         }
 
@@ -1549,14 +1815,12 @@ public class GameScreen extends UIScreen {
             t10 += 1;
         }
 
-        if (a1.atk > 3 || t10 == 1){
+        if (a1.atk > 5 || t10 == 2 || t10 == 1){
 
             a1.atk = 0;
+            t10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
-
     }
 
     public void tower3(){
@@ -1565,12 +1829,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 2 && t.time < 4){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y1 == 0){
+
+                    dcheck += 1;
+                    y1 += 1;
+                }
             }
         }
 
@@ -1579,22 +1848,28 @@ public class GameScreen extends UIScreen {
             y1 += 1;
         }
 
-        if (z2.atk > 4 || y1 == 1){
+        if (z2.atk > 6 || y1 == 2 || y1 == 1){
 
             z2.atk = 0;
+            y1 += 2;
 
         }
 
         //////////////////////////////////////////////////
 
-        if (t.time > 3 && t.time < 5){
+        if (t.time > 3 && t.time < 6){
 
             if (z2.atk == 4){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y2 == 0){
+
+                    dcheck += 1;
+                    y2 += 1;
+                }
             }
         }
 
@@ -1603,9 +1878,10 @@ public class GameScreen extends UIScreen {
             y2 += 1;
         }
 
-        if (z2.atk > 4 || y2 == 1){
+        if (z2.atk > 6 || y2 == 2 || y2 == 1){
 
             z2.atk = 0;
+            y2 += 2;
 
         }
 
@@ -1613,12 +1889,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y3 == 0){
+
+                    dcheck += 1;
+                    y3 += 1;
+                }
             }
         }
 
@@ -1627,9 +1908,10 @@ public class GameScreen extends UIScreen {
             y3 += 1;
         }
 
-        if (z2.atk > 4 || y3 == 1){
+        if (z2.atk > 6 || y3 == 2 || y3 == 1){
 
             z2.atk = 0;
+            y3 += 2;
 
         }
 
@@ -1637,12 +1919,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y4 == 0){
+
+                    dcheck += 1;
+                    y4 += 1;
+                }
             }
         }
 
@@ -1651,9 +1938,10 @@ public class GameScreen extends UIScreen {
             y4 += 1;
         }
 
-        if (z2.atk > 4 || y4 == 1){
+        if (z2.atk > 6 || y4 == 2 || y4 == 1){
 
             z2.atk = 0;
+            y4 += 2;
 
         }
 
@@ -1661,12 +1949,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y5 == 0){
+
+                    dcheck += 1;
+                    y5 += 1;
+                }
             }
         }
 
@@ -1675,7 +1968,7 @@ public class GameScreen extends UIScreen {
             y5 += 1;
         }
 
-        if (z2.atk > 4 || y5 == 1){
+        if (z2.atk > 6 || y5 == 2){
 
             z2.atk = 0;
 
@@ -1685,12 +1978,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y6 == 0){
+
+                    dcheck += 1;
+                    y6 += 1;
+                }
             }
         }
 
@@ -1699,9 +1997,10 @@ public class GameScreen extends UIScreen {
             y6 += 1;
         }
 
-        if (z2.atk > 4 || y6 == 1){
+        if (z2.atk > 6 || y6 == 2 || y6 == 1){
 
             z2.atk = 0;
+            y6 +=2;
 
         }
 
@@ -1709,12 +2008,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y7 == 0){
+
+                    dcheck += 1;
+                    y7 += 1;
+                }
             }
         }
 
@@ -1723,9 +2027,10 @@ public class GameScreen extends UIScreen {
             y7 += 1;
         }
 
-        if (z2.atk > 4 || y7 == 1){
+        if (z2.atk > 6 || y7 == 2 || y7 == 1){
 
             z2.atk = 0;
+            y7 += 2;
 
         }
 
@@ -1733,12 +2038,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y8 == 0){
+
+                    dcheck += 1;
+                    y8 += 1;
+                }
             }
         }
 
@@ -1747,9 +2057,10 @@ public class GameScreen extends UIScreen {
             y8 += 1;
         }
 
-        if (z2.atk > 4 || y8 == 1){
+        if (z2.atk > 6 || y8 == 2 || y8 ==1){
 
             z2.atk = 0;
+            y8+=2;
 
         }
 
@@ -1757,12 +2068,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y9 == 0){
+
+                    dcheck += 1;
+                    y9 += 1;
+                }
             }
         }
 
@@ -1771,9 +2087,10 @@ public class GameScreen extends UIScreen {
             y9 += 1;
         }
 
-        if (z2.atk > 4 || y9 == 1){
+        if (z2.atk > 6 || y9 == 2 || y9 == 1){
 
             z2.atk = 0;
+            y9 += 2;
 
         }
 
@@ -1781,12 +2098,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (z2.atk == 4){
+            if (z2.atk == 6){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 z2.atk = 0;
-                dcheck += 1;
+
+                if (y10 == 0){
+
+                    dcheck += 1;
+                    y10 += 1;
+                }
             }
         }
 
@@ -1795,24 +2117,28 @@ public class GameScreen extends UIScreen {
             y10 += 1;
         }
 
-        if (z2.atk > 4 || y10 == 1){
+        if (z2.atk > 6 || y10 == 2 || y10 == 1){
 
             z2.atk = 0;
+            y10 += 2;
 
         }
 
-        //////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
 
         if (t.time > 2 && t.time < 4){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y1 == 0){
+
+                    dcheck += 1;
+                    y1 += 1;
+                }
             }
         }
 
@@ -1821,9 +2147,10 @@ public class GameScreen extends UIScreen {
             y1 += 1;
         }
 
-        if (a2.atk > 3 || y1 == 1){
+        if (a2.atk > 5 || y1 == 2 || y1 == 1){
 
             a2.atk = 0;
+            y1 += 2;
 
         }
 
@@ -1831,12 +2158,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 3 && t.time < 5){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y2 == 0){
+
+                    dcheck += 1;
+                    y2 += 1;
+                }
             }
         }
 
@@ -1845,9 +2177,10 @@ public class GameScreen extends UIScreen {
             y2 += 1;
         }
 
-        if (a2.atk > 3 || y2 == 1){
+        if (a2.atk > 5 || y2 == 2 || y2 == 1){
 
             a2.atk = 0;
+            y1 += 2;
 
         }
 
@@ -1855,12 +2188,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y3 == 0){
+
+                    dcheck += 1;
+                    y3 += 1;
+                }
             }
         }
 
@@ -1869,9 +2207,10 @@ public class GameScreen extends UIScreen {
             y3 += 1;
         }
 
-        if (a2.atk > 3 || y3 == 1){
+        if (a2.atk > 5 || y3 == 2 || y3 == 1){
 
             a2.atk = 0;
+            y3 += 2;
 
         }
 
@@ -1879,12 +2218,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y4 == 0){
+
+                    dcheck += 1;
+                    y4 += 1;
+                }
             }
         }
 
@@ -1893,9 +2237,10 @@ public class GameScreen extends UIScreen {
             y4 += 1;
         }
 
-        if (a2.atk > 3 || y4 == 1){
+        if (a2.atk > 5 || y4 == 2 || y4 == 1){
 
             a2.atk = 0;
+            y4 += 2;
 
         }
 
@@ -1903,12 +2248,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y5 == 0){
+
+                    dcheck += 1;
+                    y5 += 1;
+                }
             }
         }
 
@@ -1917,9 +2267,10 @@ public class GameScreen extends UIScreen {
             y5 += 1;
         }
 
-        if (a2.atk > 3 || y5 == 1){
+        if (a2.atk > 5 || y5 == 2 || y5 == 1){
 
             a2.atk = 0;
+            y5 += 2;
 
         }
 
@@ -1927,12 +2278,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y6 == 0){
+
+                    dcheck += 1;
+                    y6 += 1;
+                }
             }
         }
 
@@ -1941,9 +2297,10 @@ public class GameScreen extends UIScreen {
             y6 += 1;
         }
 
-        if (a2.atk > 3 || y6 == 1){
+        if (a2.atk > 5 || y6 == 2 || y6 == 1){
 
             a2.atk = 0;
+            y6 += 2;
 
         }
 
@@ -1951,12 +2308,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y7 == 0){
+
+                    dcheck += 1;
+                    y7 += 1;
+                }
             }
         }
 
@@ -1965,9 +2327,10 @@ public class GameScreen extends UIScreen {
             y7 += 1;
         }
 
-        if (a2.atk > 3 || y7 == 1){
+        if (a2.atk > 5 || y7 == 2 || y7 == 1){
 
             a2.atk = 0;
+            y7 += 2;
 
         }
 
@@ -1975,12 +2338,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y8 == 0){
+
+                    dcheck += 1;
+                    y8 += 1;
+                }
             }
         }
 
@@ -1989,9 +2357,10 @@ public class GameScreen extends UIScreen {
             y8 += 1;
         }
 
-        if (a2.atk > 3 || y8 == 1){
+        if (a2.atk > 5 || y8 == 2 || y8 == 1){
 
             a2.atk = 0;
+            y8 += 2;
 
         }
 
@@ -1999,12 +2368,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y9 == 0){
+
+                    dcheck += 1;
+                    y9 += 1;
+                }
             }
         }
 
@@ -2013,9 +2387,10 @@ public class GameScreen extends UIScreen {
             y9 += 1;
         }
 
-        if (a2.atk > 3 || y9 == 1){
+        if (a2.atk > 5 || y9 == 2 || y9 == 1){
 
             a2.atk = 0;
+            y9 += 2;
 
         }
 
@@ -2023,12 +2398,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (a2.atk == 3){
+            if (a2.atk == 5){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 a2.atk = 0;
-                dcheck += 1;
+
+                if (y10 == 0){
+
+                    dcheck += 1;
+                    y10 += 1;
+                }
             }
         }
 
@@ -2037,13 +2417,12 @@ public class GameScreen extends UIScreen {
             y10 += 1;
         }
 
-        if (a2.atk > 3 || y10 == 1){
+        if (a2.atk > 5 || y10 == 2 || y10 == 1){
 
             a2.atk = 0;
+            y10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
     }
 
     public void tower4(){
@@ -2052,12 +2431,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 3 && t.time < 5){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u1 == 0){
+
+                    dcheck += 1;
+                    u1 += 1;
+                }
             }
         }
 
@@ -2066,9 +2450,10 @@ public class GameScreen extends UIScreen {
             u1 += 1;
         }
 
-        if (z3.atk > 4 || u1 == 1){
+        if (z3.atk > 6 || u1 == 2 || u1 == 1){
 
             z3.atk = 0;
+            u1 += 2;
 
         }
 
@@ -2076,12 +2461,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u2 == 0){
+
+                    dcheck += 1;
+                    u2 += 1;
+                }
             }
         }
 
@@ -2090,9 +2480,10 @@ public class GameScreen extends UIScreen {
             u2 += 1;
         }
 
-        if (z3.atk > 4 || u2 == 1){
+        if (z3.atk > 6 || u2 == 2 || u2 == 1){
 
             z3.atk = 0;
+            u2 += 2;
 
         }
 
@@ -2100,12 +2491,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u3 == 0){
+
+                    dcheck += 1;
+                    u3 += 1;
+                }
             }
         }
 
@@ -2114,9 +2510,10 @@ public class GameScreen extends UIScreen {
             u3 += 1;
         }
 
-        if (z3.atk > 4 || u3 == 1){
+        if (z3.atk > 6 || u3 == 2 || u3 == 1){
 
             z3.atk = 0;
+            u3 += 2;
 
         }
 
@@ -2124,12 +2521,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u4 == 0){
+
+                    dcheck += 1;
+                    u4 += 1;
+                }
             }
         }
 
@@ -2138,9 +2540,10 @@ public class GameScreen extends UIScreen {
             u4 += 1;
         }
 
-        if (z3.atk > 4 || u4 == 1){
+        if (z3.atk > 6 || u4 == 2 || u4 == 1){
 
             z3.atk = 0;
+            u4 += 2;
 
         }
 
@@ -2148,12 +2551,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u5 == 0){
+
+                    dcheck += 1;
+                    u5 += 1;
+                }
             }
         }
 
@@ -2162,9 +2570,10 @@ public class GameScreen extends UIScreen {
             u5 += 1;
         }
 
-        if (z3.atk > 4 || u5 == 1){
+        if (z3.atk > 6 || u5 == 2 || u5 == 1){
 
             z3.atk = 0;
+            u5 += 2;
 
         }
 
@@ -2172,12 +2581,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u6 == 0){
+
+                    dcheck += 1;
+                    u6 += 1;
+                }
             }
         }
 
@@ -2186,9 +2600,10 @@ public class GameScreen extends UIScreen {
             u6 += 1;
         }
 
-        if (z3.atk > 4 || u6 == 1){
+        if (z3.atk > 6 || u6 == 2 || u6 == 1){
 
             z3.atk = 0;
+            u6 += 2;
 
         }
 
@@ -2196,12 +2611,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u7 == 0){
+
+                    dcheck += 1;
+                    u7 += 1;
+                }
             }
         }
 
@@ -2210,9 +2630,10 @@ public class GameScreen extends UIScreen {
             u7 += 1;
         }
 
-        if (z3.atk > 4 || u7 == 1){
+        if (z3.atk > 6 || u7 == 2 || u7 ==1){
 
             z3.atk = 0;
+            u7 += 2;
 
         }
 
@@ -2220,12 +2641,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u8 == 0){
+
+                    dcheck += 1;
+                    u8 += 1;
+                }
             }
         }
 
@@ -2234,9 +2660,10 @@ public class GameScreen extends UIScreen {
             u8 += 1;
         }
 
-        if (z3.atk > 4 || u8 == 1){
+        if (z3.atk > 6 || u8 == 2 || u8 == 1){
 
             z3.atk = 0;
+            u8 += 2;
 
         }
 
@@ -2244,12 +2671,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u9 == 0){
+
+                    dcheck += 1;
+                    u9 += 1;
+                }
             }
         }
 
@@ -2258,9 +2690,10 @@ public class GameScreen extends UIScreen {
             u9 += 1;
         }
 
-        if (z3.atk > 4 || u9 == 1){
+        if (z3.atk > 6 || u9 == 2 || u9 == 1){
 
             z3.atk = 0;
+            u9 += 2;
 
         }
 
@@ -2268,12 +2701,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (z3.atk == 4){
+            if (z3.atk == 6){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 z3.atk = 0;
-                dcheck += 1;
+
+                if (u10 == 0){
+
+                    dcheck += 1;
+                    u10 += 1;
+                }
             }
         }
 
@@ -2282,24 +2720,28 @@ public class GameScreen extends UIScreen {
             u10 += 1;
         }
 
-        if (z3.atk > 4 || u10 == 1){
+        if (z3.atk > 6 || u10 == 2 || u10 == 1){
 
             z3.atk = 0;
+            u10 += 2;
 
         }
 
-        //////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         if (t.time > 3 && t.time < 5){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u1 == 0){
+
+                    dcheck += 1;
+                    u1 += 1;
+                }
             }
         }
 
@@ -2308,9 +2750,10 @@ public class GameScreen extends UIScreen {
             u1 += 1;
         }
 
-        if (a3.atk > 3 || u1 == 1){
+        if (a3.atk > 5 || u1 == 2 || u1 == 1){
 
             a3.atk = 0;
+            u1 += 2;
 
         }
 
@@ -2318,12 +2761,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u2 == 0){
+
+                    dcheck += 1;
+                    u2 += 1;
+                }
             }
         }
 
@@ -2332,9 +2780,10 @@ public class GameScreen extends UIScreen {
             u2 += 1;
         }
 
-        if (a3.atk > 3 || u2 == 1){
+        if (a3.atk > 5 || u2 == 2 || u2 == 1){
 
             a3.atk = 0;
+            u2 += 2;
 
         }
 
@@ -2342,12 +2791,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u3 == 0){
+
+                    dcheck += 1;
+                    u3 += 1;
+                }
             }
         }
 
@@ -2356,9 +2810,10 @@ public class GameScreen extends UIScreen {
             u3 += 1;
         }
 
-        if (a3.atk > 3 || u3 == 1){
+        if (a3.atk > 5 || u3 == 2 || u3 == 1){
 
             a3.atk = 0;
+            u3 += 2;
 
         }
 
@@ -2366,12 +2821,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u4 == 0){
+
+                    dcheck += 1;
+                    u4 += 1;
+                }
             }
         }
 
@@ -2380,9 +2840,10 @@ public class GameScreen extends UIScreen {
             u4 += 1;
         }
 
-        if (a3.atk > 3 || u4 == 1){
+        if (a3.atk > 5 || u4 == 2 || u4 == 1){
 
             a3.atk = 0;
+            u4 += 2;
 
         }
 
@@ -2390,12 +2851,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u5 == 0){
+
+                    dcheck += 1;
+                    u5 += 1;
+                }
             }
         }
 
@@ -2404,9 +2870,10 @@ public class GameScreen extends UIScreen {
             u5 += 1;
         }
 
-        if (a3.atk > 3 || u5 == 1){
+        if (a3.atk > 5 || u5 == 2 || u5 == 1){
 
             a3.atk = 0;
+            u5 += 2;
 
         }
 
@@ -2414,12 +2881,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u6 == 0){
+
+                    dcheck += 1;
+                    u6 += 1;
+                }
             }
         }
 
@@ -2428,9 +2900,10 @@ public class GameScreen extends UIScreen {
             u6 += 1;
         }
 
-        if (a3.atk > 3 || u6 == 1){
+        if (a3.atk > 5 || u6 == 2 || u6 == 1){
 
             a3.atk = 0;
+            u6 += 2;
 
         }
 
@@ -2438,12 +2911,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u7 == 0){
+
+                    dcheck += 1;
+                    u7 += 1;
+                }
             }
         }
 
@@ -2452,9 +2930,10 @@ public class GameScreen extends UIScreen {
             u7 += 1;
         }
 
-        if (a3.atk > 3 || u7 == 1){
+        if (a3.atk > 5 || u7 == 2 || u7 == 1){
 
             a3.atk = 0;
+            u7 += 2;
 
         }
 
@@ -2462,12 +2941,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u8 == 0){
+
+                    dcheck += 1;
+                    u8 += 1;
+                }
             }
         }
 
@@ -2476,9 +2960,10 @@ public class GameScreen extends UIScreen {
             u8 += 1;
         }
 
-        if (a3.atk > 3 || u8 == 1){
+        if (a3.atk > 5 || u8 == 2 || u8 == 1){
 
             a3.atk = 0;
+            u8 += 2;
 
         }
 
@@ -2486,12 +2971,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u9 == 0){
+
+                    dcheck += 1;
+                    u9 += 1;
+                }
             }
         }
 
@@ -2500,9 +2990,10 @@ public class GameScreen extends UIScreen {
             u9 += 1;
         }
 
-        if (a3.atk > 3 || u9 == 1){
+        if (a3.atk > 5 || u9 == 2 || u9 == 1){
 
             a3.atk = 0;
+            u9 += 2;
 
         }
 
@@ -2510,12 +3001,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (a3.atk == 3){
+            if (a3.atk == 5){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 a3.atk = 0;
-                dcheck += 1;
+
+                if (u10 == 0){
+
+                    dcheck += 1;
+                    u10 += 1;
+                }
             }
         }
 
@@ -2524,14 +3020,12 @@ public class GameScreen extends UIScreen {
             u10 += 1;
         }
 
-        if (a3.atk > 3 || u10 == 1){
+        if (a3.atk > 5 || u10 == 2 || u10 == 1){
 
             a3.atk = 0;
+            u10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
-
     }
 
     public void tower5(){
@@ -2540,12 +3034,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 4 && t.time < 6){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q1 == 0){
+
+                    dcheck += 1;
+                    q1 += 1;
+                }
             }
         }
 
@@ -2554,9 +3053,10 @@ public class GameScreen extends UIScreen {
             q1 += 1;
         }
 
-        if (z4.atk > 4 || q1 == 1){
+        if (z4.atk > 6 || q1 == 2 || q1 == 1){
 
             z4.atk = 0;
+            q1 += 2;
 
         }
 
@@ -2564,12 +3064,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q2 == 0){
+
+                    dcheck += 1;
+                    q2 += 1;
+                }
             }
         }
 
@@ -2578,9 +3083,10 @@ public class GameScreen extends UIScreen {
             q2 += 1;
         }
 
-        if (z4.atk > 4 || q2 == 1){
+        if (z4.atk > 6 || q2 == 2 || q2 == 1){
 
             z4.atk = 0;
+            q2 += 2;
 
         }
 
@@ -2588,12 +3094,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q3 == 0){
+
+                    dcheck += 1;
+                    q3 += 1;
+                }
             }
         }
 
@@ -2602,9 +3113,10 @@ public class GameScreen extends UIScreen {
             q3 += 1;
         }
 
-        if (z4.atk > 4 || q3 == 1){
+        if (z4.atk > 6 || q3 == 2 || q3 == 1){
 
             z4.atk = 0;
+            q3 += 2;
 
         }
 
@@ -2612,12 +3124,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q4 == 0){
+
+                    dcheck += 1;
+                    q4 += 1;
+                }
             }
         }
 
@@ -2626,9 +3143,10 @@ public class GameScreen extends UIScreen {
             q4 += 1;
         }
 
-        if (z4.atk > 4 || q4 == 1){
+        if (z4.atk > 6 || q4 == 2 || q4 == 1){
 
             z4.atk = 0;
+            q4 += 2;
 
         }
 
@@ -2636,12 +3154,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q5 == 0){
+
+                    dcheck += 1;
+                    q5 += 1;
+                }
             }
         }
 
@@ -2650,9 +3173,10 @@ public class GameScreen extends UIScreen {
             q5 += 1;
         }
 
-        if (z4.atk > 4 || q5 == 1){
+        if (z4.atk > 6 || q5 == 2 || q5 == 1){
 
             z4.atk = 0;
+            q5 += 2;
 
         }
 
@@ -2660,12 +3184,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q6 == 0){
+
+                    dcheck += 1;
+                    q6 += 1;
+                }
             }
         }
 
@@ -2674,9 +3203,10 @@ public class GameScreen extends UIScreen {
             q6 += 1;
         }
 
-        if (z4.atk > 4 || q6 == 1){
+        if (z4.atk > 6 || q6 == 2 || q6 == 1){
 
             z4.atk = 0;
+            q6 += 2;
 
         }
 
@@ -2684,12 +3214,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q7 == 0){
+
+                    dcheck += 1;
+                    q7 += 1;
+                }
             }
         }
 
@@ -2698,9 +3233,10 @@ public class GameScreen extends UIScreen {
             q7 += 1;
         }
 
-        if (z4.atk > 4 || q7 == 1){
+        if (z4.atk > 6 || q7 == 2 || q7 == 1){
 
             z4.atk = 0;
+            q7 += 2;
 
         }
 
@@ -2708,12 +3244,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q8 == 0){
+
+                    dcheck += 1;
+                    q8 += 1;
+                }
             }
         }
 
@@ -2722,9 +3263,10 @@ public class GameScreen extends UIScreen {
             q8 += 1;
         }
 
-        if (z4.atk > 4 || q8 == 1){
+        if (z4.atk > 6 || q8 == 2 || q8 == 1){
 
             z4.atk = 0;
+            q8 += 2;
 
         }
 
@@ -2732,12 +3274,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q9 == 0){
+
+                    dcheck += 1;
+                    q9 += 1;
+                }
             }
         }
 
@@ -2746,9 +3293,10 @@ public class GameScreen extends UIScreen {
             q9 += 1;
         }
 
-        if (z4.atk > 4 || q9 == 1){
+        if (z4.atk > 6 || q9 == 2 || q9 == 1){
 
             z4.atk = 0;
+            q9 += 2;
 
         }
 
@@ -2756,12 +3304,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 15){
 
-            if (z4.atk == 4){
+            if (z4.atk == 6){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 z4.atk = 0;
-                dcheck += 1;
+
+                if (q10 == 0){
+
+                    dcheck += 1;
+                    q10 += 1;
+                }
             }
         }
 
@@ -2770,24 +3323,28 @@ public class GameScreen extends UIScreen {
             q10 += 1;
         }
 
-        if (z4.atk > 4 || q10 == 1){
+        if (z4.atk > 6 || q10 == 2 || q10 == 1){
 
             z4.atk = 0;
+            q10 += 2;
 
         }
 
-        //////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
 
         if (t.time > 4 && t.time < 6){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q1 == 0){
+
+                    dcheck += 1;
+                    q1 += 1;
+                }
             }
         }
 
@@ -2796,9 +3353,10 @@ public class GameScreen extends UIScreen {
             q1 += 1;
         }
 
-        if (a4.atk > 3 || q1 == 1){
+        if (a4.atk > 5 || q1 == 2 || q1 == 1){
 
             a4.atk = 0;
+            q1 += 2;
 
         }
 
@@ -2806,12 +3364,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q2 == 0){
+
+                    dcheck += 1;
+                    q2 += 1;
+                }
             }
         }
 
@@ -2820,9 +3383,10 @@ public class GameScreen extends UIScreen {
             q2 += 1;
         }
 
-        if (a4.atk > 3 || q2 == 1){
+        if (a4.atk > 5 || q2 == 2 || q2 == 1){
 
             a4.atk = 0;
+            q2 += 2;
 
         }
 
@@ -2830,12 +3394,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q3 == 0){
+
+                    dcheck += 1;
+                    q3 += 1;
+                }
             }
         }
 
@@ -2844,9 +3413,10 @@ public class GameScreen extends UIScreen {
             q3 += 1;
         }
 
-        if (a4.atk > 3 || q3 == 1){
+        if (a4.atk > 5 || q3 == 2 || q3 == 1){
 
             a4.atk = 0;
+            q3 += 2;
 
         }
 
@@ -2854,12 +3424,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q4 == 0){
+
+                    dcheck += 1;
+                    q4 += 1;
+                }
             }
         }
 
@@ -2868,9 +3443,10 @@ public class GameScreen extends UIScreen {
             q4 += 1;
         }
 
-        if (a4.atk > 3 || q4 == 1){
+        if (a4.atk > 5 || q4 == 2 || q4 == 1){
 
             a4.atk = 0;
+            q4 += 2;
 
         }
 
@@ -2878,12 +3454,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q5 == 0){
+
+                    dcheck += 1;
+                    q5 += 1;
+                }
             }
         }
 
@@ -2892,9 +3473,10 @@ public class GameScreen extends UIScreen {
             q5 += 1;
         }
 
-        if (a4.atk > 3 || q5 == 1){
+        if (a4.atk > 5 || q5 == 2 || q5 == 1){
 
             a4.atk = 0;
+            q5 += 2;
 
         }
 
@@ -2902,12 +3484,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a.atk == 3){
+            if (a.atk == 5){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 a.atk = 0;
-                dcheck += 1;
+
+                if (q6 == 0){
+
+                    dcheck += 1;
+                    q6 += 1;
+                }
             }
         }
 
@@ -2916,9 +3503,10 @@ public class GameScreen extends UIScreen {
             q6 += 1;
         }
 
-        if (a4.atk > 3 || q6 == 1){
+        if (a4.atk > 5 || q6 == 2 || q6 == 1){
 
             a4.atk = 0;
+            q6 += 2;
 
         }
 
@@ -2926,12 +3514,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q7 == 0){
+
+                    dcheck += 1;
+                    q7 += 1;
+                }
             }
         }
 
@@ -2940,9 +3533,10 @@ public class GameScreen extends UIScreen {
             q7 += 1;
         }
 
-        if (a4.atk > 3 || q7 == 1){
+        if (a4.atk > 5 || q7 == 2 || q7 == 1){
 
             a4.atk = 0;
+            q7 += 2;
 
         }
 
@@ -2950,12 +3544,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q8 == 0){
+
+                    dcheck += 1;
+                    q8 += 1;
+                }
             }
         }
 
@@ -2964,9 +3563,10 @@ public class GameScreen extends UIScreen {
             q8 += 1;
         }
 
-        if (a4.atk > 3 || q8 == 1){
+        if (a4.atk > 5 || q8 == 2 || q8 == 1){
 
             a4.atk = 0;
+            q8 += 2;
 
         }
 
@@ -2974,12 +3574,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q9 == 0){
+
+                    dcheck += 1;
+                    q9 += 1;
+                }
             }
         }
 
@@ -2988,9 +3593,10 @@ public class GameScreen extends UIScreen {
             q9 += 1;
         }
 
-        if (a4.atk > 3 || q9 == 1){
+        if (a4.atk > 5 || q9 == 2 || q9 == 1){
 
             a4.atk = 0;
+            q9 += 2;
 
         }
 
@@ -2998,12 +3604,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 15){
 
-            if (a4.atk == 3){
+            if (a4.atk == 5){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 a4.atk = 0;
-                dcheck += 1;
+
+                if (q10 == 0){
+
+                    dcheck += 1;
+                    q10 += 1;
+                }
             }
         }
 
@@ -3012,14 +3623,12 @@ public class GameScreen extends UIScreen {
             q10 += 1;
         }
 
-        if (a4.atk > 3 || q10 == 1){
+        if (a4.atk > 5 || q10 == 2 || q10 == 1){
 
             a4.atk = 0;
+            q10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
-
     }
 
     public void tower6(){
@@ -3028,12 +3637,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 5 && t.time < 7){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w1 == 0){
+
+                    dcheck += 1;
+                    w1 += 1;
+                }
             }
         }
 
@@ -3042,9 +3656,10 @@ public class GameScreen extends UIScreen {
             w1 += 1;
         }
 
-        if (z5.atk > 4 || w1 == 1){
+        if (z5.atk > 6 || w1 == 2 || w1 == 1){
 
             z5.atk = 0;
+            w1 += 2;
 
         }
 
@@ -3052,12 +3667,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w2 == 0){
+
+                    dcheck += 1;
+                    w2 += 1;
+                }
             }
         }
 
@@ -3066,9 +3686,10 @@ public class GameScreen extends UIScreen {
             w2 += 1;
         }
 
-        if (z5.atk > 4 || w2 == 1){
+        if (z5.atk > 6 || w2 == 2 || w2 == 1){
 
             z5.atk = 0;
+            w2 += 2;
 
         }
 
@@ -3076,12 +3697,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w3 == 0){
+
+                    dcheck += 1;
+                    w3 += 1;
+                }
             }
         }
 
@@ -3090,9 +3716,10 @@ public class GameScreen extends UIScreen {
             w3 += 1;
         }
 
-        if (z5.atk > 4 || w3 == 1){
+        if (z5.atk > 6 || w3 == 2 || w3 == 1){
 
             z5.atk = 0;
+            w3 += 2;
 
         }
 
@@ -3100,12 +3727,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w4 == 0){
+
+                    dcheck += 1;
+                    w4 += 1;
+                }
             }
         }
 
@@ -3114,9 +3746,10 @@ public class GameScreen extends UIScreen {
             w4 += 1;
         }
 
-        if (z5.atk > 4 || w4 == 1){
+        if (z5.atk > 6 || w4 == 2 || w4 == 1){
 
             z5.atk = 0;
+            w4 += 2;
 
         }
 
@@ -3124,12 +3757,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w5 == 0){
+
+                    dcheck += 1;
+                    w5 += 1;
+                }
             }
         }
 
@@ -3138,9 +3776,10 @@ public class GameScreen extends UIScreen {
             w5 += 1;
         }
 
-        if (z5.atk > 4 || w5 == 1){
+        if (z5.atk > 6 || w5 == 2 || w5 == 1){
 
             z5.atk = 0;
+            w5 += 2;
 
         }
 
@@ -3148,12 +3787,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w6 == 0){
+
+                    dcheck += 1;
+                    w6 += 1;
+                }
             }
         }
 
@@ -3162,9 +3806,10 @@ public class GameScreen extends UIScreen {
             w6 += 1;
         }
 
-        if (z5.atk > 4 || w6 == 1){
+        if (z5.atk > 6 || w6 == 2 || w6 == 1){
 
             z5.atk = 0;
+            w6 += 2;
 
         }
 
@@ -3172,12 +3817,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w7 == 0){
+
+                    dcheck += 1;
+                    w7 += 1;
+                }
             }
         }
 
@@ -3186,9 +3836,10 @@ public class GameScreen extends UIScreen {
             w7 += 1;
         }
 
-        if (z5.atk > 4 || w7 == 1){
+        if (z5.atk > 6 || w7 == 2 || w7 == 1){
 
             z5.atk = 0;
+            w7 += 2;
 
         }
 
@@ -3196,12 +3847,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w8 == 0){
+
+                    dcheck += 1;
+                    w8 += 1;
+                }
             }
         }
 
@@ -3210,9 +3866,10 @@ public class GameScreen extends UIScreen {
             w8 += 1;
         }
 
-        if (z5.atk > 4 || w8 == 1){
+        if (z5.atk > 6 || w8 == 2 || w8 == 1){
 
             z5.atk = 0;
+            w8 += 2;
 
         }
 
@@ -3220,12 +3877,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 15){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w9 == 0){
+
+                    dcheck += 1;
+                    w9 += 1;
+                }
             }
         }
 
@@ -3234,9 +3896,10 @@ public class GameScreen extends UIScreen {
             w9 += 1;
         }
 
-        if (z5.atk > 4 || w9 == 1){
+        if (z5.atk > 6 || w9 == 2 || w9 == 1){
 
             z5.atk = 0;
+            w9 += 2;
 
         }
 
@@ -3244,12 +3907,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 14 && t.time < 16){
 
-            if (z5.atk == 4){
+            if (z5.atk == 6){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 z5.atk = 0;
-                dcheck += 1;
+
+                if (w10 == 0){
+
+                    dcheck += 1;
+                    w10 += 1;
+                }
             }
         }
 
@@ -3258,24 +3926,28 @@ public class GameScreen extends UIScreen {
             w10 += 1;
         }
 
-        if (z5.atk > 4 || w10 == 1){
+        if (z5.atk > 6 || w10 == 2 || w10 == 1){
 
             z5.atk = 0;
+            w10 += 2;
 
         }
 
-        //////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////
 
         if (t.time > 5 && t.time < 7){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w1 == 0){
+
+                    dcheck += 1;
+                    w1 += 1;
+                }
             }
         }
 
@@ -3284,9 +3956,10 @@ public class GameScreen extends UIScreen {
             w1 += 1;
         }
 
-        if (a5.atk > 3 || w1 == 1){
+        if (a5.atk > 5 || w1 == 2 || w1 == 1){
 
             a5.atk = 0;
+            w1 += 2;
 
         }
 
@@ -3294,12 +3967,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w2 == 0){
+
+                    dcheck += 1;
+                    w2 += 1;
+                }
             }
         }
 
@@ -3308,9 +3986,10 @@ public class GameScreen extends UIScreen {
             w2 += 1;
         }
 
-        if (a5.atk > 3 || w2 == 1){
+        if (a5.atk > 5 || w2 == 2 || w2 == 1){
 
             a5.atk = 0;
+            w2 += 2;
 
         }
 
@@ -3318,12 +3997,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w3 == 0){
+
+                    dcheck += 1;
+                    w3 += 1;
+                }
             }
         }
 
@@ -3332,9 +4016,10 @@ public class GameScreen extends UIScreen {
             w3 += 1;
         }
 
-        if (a5.atk > 3 || w3 == 1){
+        if (a5.atk > 5 || w3 == 2 || w3 == 1){
 
             a5.atk = 0;
+            w3 += 2;
 
         }
 
@@ -3342,12 +4027,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w4 == 0){
+
+                    dcheck += 1;
+                    w4 += 1;
+                }
             }
         }
 
@@ -3356,9 +4046,10 @@ public class GameScreen extends UIScreen {
             w4 += 1;
         }
 
-        if (a5.atk > 3 || w4 == 1){
+        if (a5.atk > 5 || w4 == 2 || w4 == 1){
 
             a5.atk = 0;
+            w4 += 2;
 
         }
 
@@ -3366,12 +4057,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w5 == 0){
+
+                    dcheck += 1;
+                    w5 += 1;
+                }
             }
         }
 
@@ -3380,9 +4076,10 @@ public class GameScreen extends UIScreen {
             w5 += 1;
         }
 
-        if (a5.atk > 3 || w5 == 1){
+        if (a5.atk > 5 || w5 == 2 || w5 == 1){
 
             a5.atk = 0;
+            w5 += 2;
 
         }
 
@@ -3390,12 +4087,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w6 == 0){
+
+                    dcheck += 1;
+                    w6 += 1;
+                }
             }
         }
 
@@ -3404,9 +4106,10 @@ public class GameScreen extends UIScreen {
             w6 += 1;
         }
 
-        if (a5.atk > 3 || w6 == 1){
+        if (a5.atk > 5 || w6 == 2 || w6 == 1){
 
             a5.atk = 0;
+            w6 += 2;
 
         }
 
@@ -3414,12 +4117,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w7 == 0){
+
+                    dcheck += 1;
+                    w7 += 1;
+                }
             }
         }
 
@@ -3428,9 +4136,10 @@ public class GameScreen extends UIScreen {
             w7 += 1;
         }
 
-        if (a5.atk > 3 || w7 == 1){
+        if (a5.atk > 5 || w7 == 2 || w7 == 1){
 
             a5.atk = 0;
+            w7 += 2;
 
         }
 
@@ -3438,12 +4147,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w8 == 0){
+
+                    dcheck += 1;
+                    w8 += 1;
+                }
             }
         }
 
@@ -3452,9 +4166,10 @@ public class GameScreen extends UIScreen {
             w8 += 1;
         }
 
-        if (a5.atk > 3 || w8 == 1){
+        if (a5.atk > 5 || w8 == 2 || w8 == 1){
 
             a5.atk = 0;
+            w8 += 2;
 
         }
 
@@ -3462,12 +4177,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 15){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w9 == 0){
+
+                    dcheck += 1;
+                    w9 += 1;
+                }
             }
         }
 
@@ -3476,9 +4196,10 @@ public class GameScreen extends UIScreen {
             w9 += 1;
         }
 
-        if (a5.atk > 3 || w9 == 1){
+        if (a5.atk > 5 || w9 == 2 || w9 == 1){
 
             a5.atk = 0;
+            w9 += 2;
 
         }
 
@@ -3486,12 +4207,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 14 && t.time < 16){
 
-            if (a5.atk == 3){
+            if (a5.atk == 5){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 a5.atk = 0;
-                dcheck += 1;
+
+                if (w10 == 0){
+
+                    dcheck += 1;
+                    w10 += 1;
+                }
             }
         }
 
@@ -3500,13 +4226,12 @@ public class GameScreen extends UIScreen {
             w10 += 1;
         }
 
-        if (a5.atk > 4 || w10 == 1){
+        if (a5.atk > 5 || w10 == 2 || w10 == 1){
 
             a5.atk = 0;
+            w10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
     }
 
     public void tower7(){
@@ -3515,12 +4240,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 6 && t.time < 8){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e1 == 0){
+
+                    dcheck += 1;
+                    e1 += 1;
+                }
             }
         }
 
@@ -3529,9 +4259,10 @@ public class GameScreen extends UIScreen {
             e1 += 1;
         }
 
-        if (z6.atk > 4 || e1 == 1){
+        if (z6.atk > 6 || e1 == 2 || e1 == 1){
 
             z6.atk = 0;
+            e1 += 2;
 
         }
 
@@ -3539,12 +4270,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e2 == 0){
+
+                    dcheck += 1;
+                    e2 += 1;
+                }
             }
         }
 
@@ -3553,9 +4289,10 @@ public class GameScreen extends UIScreen {
             e2 += 1;
         }
 
-        if (z6.atk > 4 || e2 == 1){
+        if (z6.atk > 6 || e2 == 2 || e2 == 1){
 
             z6.atk = 0;
+            e2 += 2;
 
         }
 
@@ -3563,12 +4300,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e3 == 0){
+
+                    dcheck += 1;
+                    e3 += 1;
+                }
             }
         }
 
@@ -3577,9 +4319,10 @@ public class GameScreen extends UIScreen {
             e3 += 1;
         }
 
-        if (z6.atk > 4 || e3 == 1){
+        if (z6.atk > 6 || e3 == 2 || e3 == 1){
 
             z6.atk = 0;
+            e3 += 2;
 
         }
 
@@ -3587,12 +4330,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e4 == 0){
+
+                    dcheck += 1;
+                    e4 += 1;
+                }
             }
         }
 
@@ -3601,9 +4349,10 @@ public class GameScreen extends UIScreen {
             e4 += 1;
         }
 
-        if (z6.atk > 4 || e4 == 1){
+        if (z6.atk > 6 || e4 == 2 | e4 == 1){
 
             z6.atk = 0;
+            e4 += 2;
 
         }
 
@@ -3611,12 +4360,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e5 == 0){
+
+                    dcheck += 1;
+                    e5 += 1;
+                }
             }
         }
 
@@ -3625,9 +4379,10 @@ public class GameScreen extends UIScreen {
             e5 += 1;
         }
 
-        if (z6.atk > 4 || e5 == 1){
+        if (z6.atk > 6 || e5 == 2 || e5 == 1){
 
             z6.atk = 0;
+            e5 += 2;
 
         }
 
@@ -3635,12 +4390,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 11 && t.time < 13){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e6 == 0){
+
+                    dcheck += 1;
+                    e6 += 1;
+                }
             }
         }
 
@@ -3649,9 +4409,10 @@ public class GameScreen extends UIScreen {
             e6 += 1;
         }
 
-        if (z6.atk > 4 || e6 == 1){
+        if (z6.atk > 6 || e6 == 2 || e6 == 1){
 
             z6.atk = 0;
+            e6 += 2;
 
         }
 
@@ -3659,12 +4420,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e7 == 0){
+
+                    dcheck += 1;
+                    e7 += 1;
+                }
             }
         }
 
@@ -3673,9 +4439,10 @@ public class GameScreen extends UIScreen {
             e7 += 1;
         }
 
-        if (z6.atk > 4 || e7 == 1){
+        if (z6.atk > 6 || e7 == 2 || e7 == 1){
 
             z6.atk = 0;
+            e7 += 2;
 
         }
 
@@ -3683,12 +4450,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 15){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e8 == 0){
+
+                    dcheck += 1;
+                    e8 += 1;
+                }
             }
         }
 
@@ -3697,9 +4469,10 @@ public class GameScreen extends UIScreen {
             e8 += 1;
         }
 
-        if (z6.atk > 4 || e8 == 1){
+        if (z6.atk > 6 || e8 == 2 || e8 == 1){
 
             z6.atk = 0;
+            e8 += 2;
 
         }
 
@@ -3707,12 +4480,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 14 && t.time < 16){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e9 == 0){
+
+                    dcheck += 1;
+                    e9 += 1;
+                }
             }
         }
 
@@ -3721,9 +4499,10 @@ public class GameScreen extends UIScreen {
             e9 += 1;
         }
 
-        if (z6.atk > 4 || e9 == 1){
+        if (z6.atk > 6 || e9 == 2 || e9 == 1){
 
             z6.atk = 0;
+            e9 += 2;
 
         }
 
@@ -3731,12 +4510,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 15 && t.time < 17){
 
-            if (z6.atk == 4){
+            if (z6.atk == 6){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 z6.atk = 0;
-                dcheck += 1;
+
+                if (e10 == 0){
+
+                    dcheck += 1;
+                    e10 += 1;
+                }
             }
         }
 
@@ -3745,24 +4529,28 @@ public class GameScreen extends UIScreen {
             e10 += 1;
         }
 
-        if (z6.atk > 4 || e10 == 1){
+        if (z6.atk > 6 || e10 == 2 || e10 == 1){
 
             z6.atk = 0;
+            e10 += 2;
 
         }
 
-        //////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
         if (t.time > 6 && t.time < 8){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m.layer().destroy();
-                m.body().getWorld().destroyBody(m.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e1 == 0){
+
+                    dcheck += 1;
+                    e1 += 1;
+                }
             }
         }
 
@@ -3771,9 +4559,10 @@ public class GameScreen extends UIScreen {
             e1 += 1;
         }
 
-        if (a6.atk > 3 || e1 == 1){
+        if (a6.atk > 5 || e1 == 2 || e1 == 1){
 
             a6.atk = 0;
+            e1 += 2;
 
         }
 
@@ -3781,12 +4570,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 7 && t.time < 9){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m1.layer().destroy();
-                m1.body().getWorld().destroyBody(m1.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e2 == 0){
+
+                    dcheck += 1;
+                    e2 += 1;
+                }
             }
         }
 
@@ -3795,9 +4589,10 @@ public class GameScreen extends UIScreen {
             e2 += 1;
         }
 
-        if (a6.atk > 3 || e2 == 1){
+        if (a6.atk > 5 || e2 == 2 || e2 == 1){
 
             a6.atk = 0;
+            e2 += 2;
 
         }
 
@@ -3805,12 +4600,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 8 && t.time < 10){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m2.layer().destroy();
-                m2.body().getWorld().destroyBody(m2.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e3 == 0){
+
+                    dcheck += 1;
+                    e3 += 1;
+                }
             }
         }
 
@@ -3819,9 +4619,10 @@ public class GameScreen extends UIScreen {
             e3 += 1;
         }
 
-        if (a6.atk > 3 || e3 == 1){
+        if (a6.atk > 5 || e3 == 2 || e3 == 1){
 
             a6.atk = 0;
+            e3 += 2;
 
         }
 
@@ -3829,12 +4630,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 9 && t.time < 11){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m3.layer().destroy();
-                m3.body().getWorld().destroyBody(m3.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e4 == 0){
+
+                    dcheck += 1;
+                    e4 += 1;
+                }
             }
         }
 
@@ -3843,9 +4649,10 @@ public class GameScreen extends UIScreen {
             e4 += 1;
         }
 
-        if (a6.atk > 3 || e4 == 1){
+        if (a6.atk > 5 || e4 == 2 || e4 == 1){
 
             a6.atk = 0;
+            e4 += 2;
 
         }
 
@@ -3853,12 +4660,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 10 && t.time < 12){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m4.layer().destroy();
-                m4.body().getWorld().destroyBody(m4.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e5 == 0){
+
+                    dcheck += 1;
+                    e5 += 1;
+                }
             }
         }
 
@@ -3867,9 +4679,10 @@ public class GameScreen extends UIScreen {
             e5 += 1;
         }
 
-        if (a6.atk > 3 || e5 == 1){
+        if (a6.atk > 5 || e5 == 2 || e5 == 1){
 
             a6.atk = 0;
+            e5 += 2;
 
         }
 
@@ -3877,12 +4690,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 13){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m5.layer().destroy();
-                m5.body().getWorld().destroyBody(m5.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e6 == 0){
+
+                    dcheck += 1;
+                    e6 += 1;
+                }
             }
         }
 
@@ -3891,9 +4709,10 @@ public class GameScreen extends UIScreen {
             e6 += 1;
         }
 
-        if (a6.atk > 3 || e6 == 1){
+        if (a6.atk > 5 || e6 == 2 || e6 == 1){
 
             a6.atk = 0;
+            e6 += 2;
 
         }
 
@@ -3901,12 +4720,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 12 && t.time < 14){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m6.layer().destroy();
-                m6.body().getWorld().destroyBody(m6.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e7 == 0){
+
+                    dcheck += 1;
+                    e7 += 1;
+                }
             }
         }
 
@@ -3915,9 +4739,10 @@ public class GameScreen extends UIScreen {
             e7 += 1;
         }
 
-        if (a6.atk > 3 || e7 == 1){
+        if (a6.atk > 5 || e7 == 2 || e7 == 1){
 
             a6.atk = 0;
+            e7 += 2;
 
         }
 
@@ -3925,12 +4750,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 13 && t.time < 15){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m7.layer().destroy();
-                m7.body().getWorld().destroyBody(m7.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e8 == 0){
+
+                    dcheck += 1;
+                    e8 += 1;
+                }
             }
         }
 
@@ -3939,9 +4769,10 @@ public class GameScreen extends UIScreen {
             e8 += 1;
         }
 
-        if (a6.atk > 3 || e8 == 1){
+        if (a6.atk > 5 || e8 == 2 || e8 == 1){
 
             a6.atk = 0;
+            e8 += 2;
 
         }
 
@@ -3949,12 +4780,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 14 && t.time < 16){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m8.layer().destroy();
-                m8.body().getWorld().destroyBody(m8.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e9 == 0){
+
+                    dcheck += 1;
+                    e9 += 1;
+                }
             }
         }
 
@@ -3963,9 +4799,10 @@ public class GameScreen extends UIScreen {
             e9 += 1;
         }
 
-        if (a6.atk > 3 || e9 == 1){
+        if (a6.atk > 5 || e9 == 2 || e9 == 1){
 
             a6.atk = 0;
+            e9 += 2;
 
         }
 
@@ -3973,12 +4810,17 @@ public class GameScreen extends UIScreen {
 
         if (t.time > 15 && t.time < 17){
 
-            if (a6.atk == 3){
+            if (a6.atk == 5){
 
                 m9.layer().destroy();
-                m9.body().getWorld().destroyBody(m9.body());
+                soundj2.play();
                 a6.atk = 0;
-                dcheck += 1;
+
+                if (e10 == 0){
+
+                    dcheck += 1;
+                    e10 += 1;
+                }
             }
         }
 
@@ -3987,15 +4829,15 @@ public class GameScreen extends UIScreen {
             e10 += 1;
         }
 
-        if (a6.atk > 3 || e10 == 1){
+        if (a6.atk > 5 || e10 == 2 || e10 == 1){
 
             a6.atk = 0;
+            e10 += 2;
 
         }
-
-        //////////////////////////////////////////////////
-
     }
+
+    ////////////////////////////////////////////
 
     public void score(){
 
@@ -4003,7 +4845,7 @@ public class GameScreen extends UIScreen {
 
             btImage = assets().getImage("images/score0.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
@@ -4012,70 +4854,77 @@ public class GameScreen extends UIScreen {
 
             btImage = assets().getImage("images/score1.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 2){
 
+
             btImage = assets().getImage("images/score2.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 3){
 
+
             btImage = assets().getImage("images/score3.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 4){
 
+
             btImage = assets().getImage("images/score4.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 5){
 
+
             btImage = assets().getImage("images/score5.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 6){
 
+
             btImage = assets().getImage("images/score6.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 7){
 
+
             btImage = assets().getImage("images/score7.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 8){
 
+
             btImage = assets().getImage("images/score8.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
@@ -4084,18 +4933,208 @@ public class GameScreen extends UIScreen {
 
             btImage = assets().getImage("images/score9.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
         }
 
         if (dcheck == 10){
 
+
             btImage = assets().getImage("images/score10.png");
             btLayer = graphics().createImageLayer(btImage);
-            btLayer.setTranslation(510,16);
+            btLayer.setTranslation(520,10);
             layer.add(btLayer);
 
+        }
+
+    }
+
+    public void money(){
+
+        if (money == 0){
+
+            btImage = assets().getImage("images/0.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 50){
+
+            btImage = assets().getImage("images/50.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 100){
+
+            btImage = assets().getImage("images/100.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 150){
+
+            btImage = assets().getImage("images/150.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 200){
+
+            btImage = assets().getImage("images/200.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 250){
+
+            btImage = assets().getImage("images/250.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 300){
+
+            btImage = assets().getImage("images/300.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 350){
+
+            btImage = assets().getImage("images/350.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 400){
+
+            btImage = assets().getImage("images/400.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 450){
+
+            btImage = assets().getImage("images/450.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+        if (money == 500){
+
+            btImage = assets().getImage("images/500.png");
+            btLayer = graphics().createImageLayer(btImage);
+            btLayer.setTranslation(520,45);
+            layer.add(btLayer);
+
+        }
+
+    }
+
+    public void checkmoney(){
+
+        if (dcheck == 1){
+
+            if (moneycheck1 == false){
+
+                money += 50+100;
+                moneycheck1 = true;
+
+                System.out.print(money);
+
+            }
+        }
+        if (dcheck == 2){
+
+            if (moneycheck2 == false){
+
+                money += 50;
+                moneycheck2 = true;
+            }
+        }
+        if (dcheck == 3){
+
+            if (moneycheck3 == false){
+
+                money += 50;
+                moneycheck3 = true;
+
+            }
+        }
+        if (dcheck == 4){
+
+            if (moneycheck4 == false){
+
+                money += 50;
+                moneycheck4 = true;
+
+            }
+        }
+        if (dcheck == 5){
+
+            if (moneycheck5 == false){
+
+                money += 50;
+                moneycheck5 = true;
+
+            }
+        }
+        if (dcheck == 6){
+
+            if (moneycheck6 == false){
+
+                money += 50;
+                moneycheck6 = true;
+
+            }
+        }
+        if (dcheck == 7){
+
+            if (moneycheck7 == false){
+
+                money += 50;
+                moneycheck7 = true;
+
+            }
+        }
+        if (dcheck == 8){
+
+            if (moneycheck8 == false){
+
+                money += 50;
+                moneycheck8 = true;
+
+            }
+        }
+        if (dcheck == 9){
+
+            if (moneycheck9 == false){
+
+                money += 50;
+                moneycheck9 = true;
+
+            }
+        }
+        if (dcheck == 10){
+
+            if (moneycheck10 == false){
+
+                money += 50;
+                moneycheck10 = true;
+
+            }
         }
 
     }

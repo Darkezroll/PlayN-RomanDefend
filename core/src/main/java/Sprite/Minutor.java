@@ -25,6 +25,7 @@ public class Minutor {
     private float n,b,c,d,f,g,h,i,j,k,l,m,o,p = 0;
     public boolean gameend = false;
     private int end = 0;
+    private int fast = 0;
 
     public Minutor(final World world, final float x,final float y){
         sprite = SpriteLoader.getSprite("images/minutor.json");
@@ -108,6 +109,7 @@ public class Minutor {
         ////////////////////////////////////////////////////////////////////////
 
         if (c > 12.3){
+
 
             c = 0;
 
@@ -261,6 +263,8 @@ public class Minutor {
                 gameend = true;
 
             }
+
+            System.out.println(end);
         }
 
     }
@@ -284,7 +288,7 @@ public class Minutor {
         if (!hasLoaded) return;
 
         e += delta;
-        if (e > 110){
+        if (e > 110 ){
             switch (state){
                 case WALK: offset = 0;
 
@@ -304,13 +308,11 @@ public class Minutor {
                     p = p + 0.2f;
 
                     break;
-
             }
 
             spriteIndex = offset + ((spriteIndex+1)%4);
             sprite.setSprite(spriteIndex);
             e=0;
-
         }
 
     }

@@ -58,7 +58,9 @@ public class StartScreen extends UIScreen {
             @Override
             public void onPointerEnd(Pointer.Event event) {
                 super.onPointerEnd(event);
-                ss.remove(StartScreen.this);
+
+                Screen home = new HomeScreen(ss);
+                ss.push(home);
             }
 
         });
