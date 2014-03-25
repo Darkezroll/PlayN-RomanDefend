@@ -20,12 +20,10 @@ public class Minutor {
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
     private Body body;
-    private Time t;
 
     private float n,b,c,d,f,g,h,i,j,k,l,m,o,p = 0;
     public boolean gameend = false;
     private int end = 0;
-    private int fast = 0;
 
     public Minutor(final World world, final float x,final float y){
         sprite = SpriteLoader.getSprite("images/minutor.json");
@@ -34,11 +32,11 @@ public class Minutor {
             public void onSuccess(Sprite result) {
 
                 sprite.setSprite(spriteIndex);
-                sprite.layer().setOrigin(sprite.width()/2f,sprite.height()/2f);
-                sprite.layer().setTranslation(x,y);
+                sprite.layer().setOrigin(sprite.width() / 2f, sprite.height() / 2f);
+                sprite.layer().setTranslation(x, y);
 
 
-                body = initPhysicsBody(world,GameScreen.M_PER_PIXEL * x,GameScreen.M_PER_PIXEL * y);
+                body = initPhysicsBody(world, GameScreen.M_PER_PIXEL * x, GameScreen.M_PER_PIXEL * y);
 
                 hasLoaded = true;
 
@@ -124,6 +122,10 @@ public class Minutor {
         if (d > 16.1){
 
             d = 0;
+
+            state = State.WALKR;
+            spriteIndex = 0;
+            e = 0;
 
         }
         if (n > 16.1){
@@ -275,7 +277,7 @@ public class Minutor {
 
 
     public enum State{
-        WALK
+        WALK,WALKR
     }
 
     private State state=State.WALK;
@@ -291,6 +293,25 @@ public class Minutor {
         if (e > 110 ){
             switch (state){
                 case WALK: offset = 0;
+
+                    n = n + 0.2f;
+                    b = b + 0.2f;
+                    c = c + 0.2f;
+                    d = d + 0.2f;
+                    f = f + 0.2f;
+                    g = g + 0.2f;
+                    h = h + 0.2f;
+                    i = i + 0.2f;
+                    j = j + 0.2f;
+                    k = k + 0.2f;
+                    l = l + 0.2f;
+                    m = m + 0.2f;
+                    o = o + 0.2f;
+                    p = p + 0.2f;
+
+                    break;
+
+                case WALKR: offset = 4;
 
                     n = n + 0.2f;
                     b = b + 0.2f;

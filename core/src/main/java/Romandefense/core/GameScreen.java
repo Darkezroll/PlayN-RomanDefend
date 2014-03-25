@@ -28,7 +28,7 @@ public class GameScreen extends UIScreen {
 
     private World world;
     private DebugDrawBox2D debugDraw;
-    private boolean showDebugDraw = true;
+    private boolean showDebugDraw = false;
     private  ScreenStack ss;
     private Image bgImage,btImage;
     private Layer bgLayer,btLayer;
@@ -367,6 +367,8 @@ public class GameScreen extends UIScreen {
             @Override
             public void onPointerEnd(Pointer.Event event) {
 
+                soundj.stop();
+                soundj1.stop();
                 Screen start = new StartScreen(ss);
                 ss.push(start);
             }
@@ -517,21 +519,25 @@ public class GameScreen extends UIScreen {
                 if (dcheck < 8){
 
                     ss.push(new Lose(ss));
+                    soundj.stop();
                 }
 
                 if (dcheck == 8){
 
                     ss.push(new Win1(ss));
+                    soundj.stop();
                 }
 
                 if (dcheck == 9){
 
                     ss.push(new Win2(ss));
+                    soundj.stop();
                 }
 
                 if (dcheck == 10){
 
                     ss.push(new Win3(ss));
+                    soundj.stop();
                 }
             }
         }
